@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <iostream>
+
+int main()
+{
+	setlocale(LC_CTYPE, "Russian");
+	printf("Введите строку\n"); 
+	int const maxSize = 20; // Размер массива
+	char symbols[maxSize] = ""; // Создание массива
+	gets(symbols);
+	int i = 0;
+	int counter = 0;
+	while ((symbols[i] != '\0') && (counter >= 0))
+	{
+	/* В цикле счетчик увеличивается, когда встречает открывающую скобку и уменьшается, когда встречает закрывающую
+	если в конце цикла count равен 0, баланс соблюдается
+	// если count становится отрицательным, значит баланс заведомо не соблюдается и цикл завершается раньше времени
+	*/
+		if (symbols[i] == '(')
+			counter++;
+		if (symbols[i] == ')')
+			counter--;
+		i++;
+	}
+	if (counter == 0)
+		printf("// Баланс скобок соблюдается\n");
+	else
+		printf("Баланс скобок не соблюдается\n");
+}
