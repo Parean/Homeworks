@@ -1,0 +1,6 @@
+009
+	{
+void printList(List *list)
+
+
+		if (comparisonOfStrings(value, temp->value) == equivalent)

@@ -1,0 +1,10 @@
+009
+void addInList(String *value, List *list, int &count, bool isRebuilding)
+{
+	ListElement *temp = list->first;
+	while (true)
+	{
+void printList(List *list)
+
+
+		if (comparisonOfStrings(value, temp->value) == equivalent)
