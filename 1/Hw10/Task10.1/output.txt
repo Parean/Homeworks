@@ -1,0 +1,3 @@
+(0 (0 (b null null)(0 (o null null)(  null null)))(0 (0 (0 (r null null)(! null null))(p null null))(e null null)))
+
+0011111010110001001010101100111110001001
