@@ -2,7 +2,7 @@
 #include "translator.h"
 #include <iostream>
 
-Calculator::Calculator(kindOfStack kind, char *string)
+Calculator::Calculator(KindOfStack kind, char *string)
 {
 	switch (kind)
 	{
@@ -19,7 +19,7 @@ Calculator::Calculator(kindOfStack kind, char *string)
 	storage = new char[30];
 }
 
-void Calculator::reader()
+void Calculator::read()
 {
 	for (int i = 0; i < 30; i++)
 		storage[i] = 0;
@@ -35,7 +35,7 @@ float Calculator::calculation()
 	
 	while (*currentSymbol != '\0')
 	{
-		reader();
+        read();
 		switch (*storage)
 		{
 		case '+':

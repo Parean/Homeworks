@@ -15,7 +15,12 @@ public:
 private:
 	float *stackArray;
 	int sizeOfStack;
-	void increaseStack();
-	int numberOfElements;
+    int numberOfElements;
+
+    /**
+     * The function is called when the array is full
+     * and increases its size by half
+     */
+    void increaseStack();
 };
 

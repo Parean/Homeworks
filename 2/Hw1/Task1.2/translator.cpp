@@ -1,7 +1,7 @@
 #include "translator.h"
 #include <iostream>
 
-Translator::Translator(kindOfStack kind, char *string)
+Translator::Translator(KindOfStack kind, char *string)
 {
 	switch (kind)
 	{

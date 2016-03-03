@@ -1,11 +1,16 @@
 #pragma once
 
-enum kindOfStack
+enum KindOfStack
 {
 	array,
 	pointer
 };
 
+/**
+ * @class Stack
+ * Virtual class from which inherit other classes
+ * with different implementations of stack
+ */
 class Stack
 {
 public:

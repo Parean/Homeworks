@@ -1,9 +1,9 @@
 #include "stackArray.h"
 
-StackArray::StackArray()
+StackArray::StackArray():
+    sizeOfStack(50),
+    numberOfElements(0)
 {
-	sizeOfStack = 50;
-	numberOfElements = 0;
 	stackArray = new float[sizeOfStack];
 }
 
