@@ -14,7 +14,12 @@ public:
 private:
 	int *listArray;
 	int sizeOfList;
-	void increaseList();
-	int numberOfElements;
+    int numberOfElements;
+
+    /**
+     * The function is called when the array is full
+     * and increases its size by half
+     */
+    void increaseList();
 };
 

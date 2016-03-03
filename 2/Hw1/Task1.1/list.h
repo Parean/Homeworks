@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @Class List
+ * Virtual class from which inherit other classes
+ * with different implementations of singly-linked list
+ */
 class List
 {
 public:
