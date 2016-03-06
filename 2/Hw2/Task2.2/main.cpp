@@ -1,5 +1,6 @@
 #include "consolOutputer.h"
 #include "fileOutputer.h"
+
 #include <ctime>
 #include <stdlib.h>
 #include <stdio.h>
@@ -39,6 +40,7 @@ int main()
     }
     }
     outputer->output();
+    delete outputer;
     for (int i = 0; i < size; i++)
         delete[] numbers[i];
     delete[] numbers;
