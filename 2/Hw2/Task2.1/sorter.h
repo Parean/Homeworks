@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-enum kindOfSorter
+enum KindOfSorter
 {
     bubble,
     insertion,
