@@ -10,17 +10,17 @@
 class Calculator
 {
 public:
-    Calculator(char *string);
+	Calculator(char *string);
 
-    /// @return expression value
-    float calculation();
+	/// @return expression value
+	float calculation();
 	~Calculator();
+
 private:
-    StackPointer *stack;
+	StackPointer *stack;
 	char *storage;
 	char *expression;
 	char *currentSymbol;
 
-    void read();
+	void read();
 };
-

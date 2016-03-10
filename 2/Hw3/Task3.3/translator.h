@@ -9,13 +9,14 @@
 class Translator
 {
 public:
-    Translator(char *string);
+	Translator(char *string);
 
-    /// @return The expression in the Polish notation
-    char *translation();
+	/// @return The expression in the Polish notation
+	char *translation();
 	~Translator();
+
 private:
-    StackPointer *stack;
+	StackPointer *stack;
 	char *inputString;
 
 	bool isPlusOrMinus() const;

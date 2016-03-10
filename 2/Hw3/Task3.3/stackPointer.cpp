@@ -1,9 +1,9 @@
 #include "stackPointer.h"
 
 StackPointer::StackPointer():
-    numberOfElements(0)
+	numberOfElements(0)
 {
-    stack = new StackElement(0, nullptr);
+	stack = new StackElement(0, nullptr);
 }
 
 void StackPointer::push(float value)

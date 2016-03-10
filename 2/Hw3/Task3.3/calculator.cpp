@@ -1,4 +1,4 @@
-#include "calculator.h"
+﻿#include "calculator.h"
 #include "translator.h"
 
 #include <stdlib.h>
@@ -6,10 +6,9 @@
 
 Calculator::Calculator(char *string)
 {
-    stack = new StackPointer;
-    Translator *translator = new Translator(string);
-	currentSymbol = expression = translator->translation();
-	delete translator;
+	stack = new StackPointer;
+	Translator translator(string);
+	currentSymbol = expression = translator.translation();
 	storage = new char[30];
 }
 
@@ -26,10 +25,9 @@ void Calculator::read()
 
 float Calculator::calculation()
 {
-	
 	while (*currentSymbol != '\0')
 	{
-        read();
+		read();
 		switch (*storage)
 		{
 		case '+':
@@ -61,7 +59,7 @@ float Calculator::calculation()
 					break;
 		}
 		default:
-                    stack->push(atof(storage));
+					stack->push(atof(storage));
 		}
 	}
 	return stack->pop();

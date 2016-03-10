@@ -4,13 +4,12 @@
 
 Translator::Translator(char *string)
 {
-    stack = new StackPointer;
-    inputString = string;
+	stack = new StackPointer;
+	inputString = string;
 }
 
 bool Translator::isPlusOrMinus() const
 {
-	
 	return (stack->top() == '-' || stack->top() == '+');
 }
 
@@ -26,9 +25,9 @@ char *Translator::translation()
 	int numberOfSymbols = 0;
 	while (*inputString != '\0')
 	{
-        if (isdigit(*inputString) || *inputString == '.')
+		if (isdigit(*inputString) || *inputString == '.')
 		{
-            while (isdigit(*inputString) || *inputString == '.')
+			while (isdigit(*inputString) || *inputString == '.')
 				outputString[numberOfSymbols++] = *inputString++;
 			outputString[numberOfSymbols++] = ' ';
 		}

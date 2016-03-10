@@ -11,6 +11,7 @@ public:
 	bool isEmpty() const;
 	int length() const;
 	~StackPointer();
+
 private:
 	struct StackElement
 	{
@@ -21,7 +22,7 @@ private:
 			next(nextElement)
 		{}
 	};
+
 	StackElement *stack;
 	int numberOfElements;
 };
-
