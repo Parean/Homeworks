@@ -2,7 +2,7 @@
 
 ListArray::ListArray()
 {
-	sizeOfList = 50;
+	sizeOfList = 10;
 	numberOfElements = 0;
 	listArray = new int[sizeOfList];
 }
