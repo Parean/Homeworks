@@ -1,7 +1,7 @@
+QT       += core \
+    testlib
 TEMPLATE = app
 CONFIG += console c++11
-
-
 
 SOURCES += main.cpp \
     listArray.cpp \
