@@ -20,5 +20,5 @@ public:
 	virtual float top() = 0;
 	virtual bool isEmpty() const = 0;
 	virtual int length() const = 0;
-    virtual ~Stack() {}
+	virtual ~Stack() {}
 };

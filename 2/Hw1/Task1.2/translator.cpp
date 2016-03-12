@@ -1,4 +1,5 @@
 #include "translator.h"
+
 #include <iostream>
 
 Translator::Translator(KindOfStack kind, char *string)
@@ -17,7 +18,7 @@ Translator::Translator(KindOfStack kind, char *string)
 
 bool Translator::isPlusOrMinus() const
 {
-	
+
 	return (stack->top() == '-' || stack->top() == '+');
 }
 
@@ -86,7 +87,7 @@ char *Translator::translation()
 		outputString[numberOfSymbols++] = ' ';
 	}
 	outputString[numberOfSymbols++] = '\0';
-		if (!stack->isEmpty() && stack->top() == '(')
+	if (!stack->isEmpty() && stack->top() == '(')
 		checkError = false;
 	if (checkError)
 		return outputString;

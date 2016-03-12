@@ -1,5 +1,6 @@
 #include "calculator.h"
 #include "translator.h"
+
 #include <iostream>
 
 Calculator::Calculator(KindOfStack kind, char *string)
@@ -32,42 +33,42 @@ void Calculator::read()
 
 float Calculator::calculation()
 {
-	
+
 	while (*currentSymbol != '\0')
 	{
-        read();
+		read();
 		switch (*storage)
 		{
 		case '+':
 		{
-					float firstValue = stack->pop();
-					float secondValue = stack->pop();
-					stack->push(firstValue + secondValue);
-					break;
+			float firstValue = stack->pop();
+			float secondValue = stack->pop();
+			stack->push(firstValue + secondValue);
+			break;
 		}
 		case '-':
 		{
-					float firstValue = stack->pop();
-					float secondValue = stack->pop();
-					stack->push(secondValue - firstValue);
-					break;
+			float firstValue = stack->pop();
+			float secondValue = stack->pop();
+			stack->push(secondValue - firstValue);
+			break;
 		}
 		case '*':
 		{
-					float firstValue = stack->pop();
-					float secondValue = stack->pop();
-					stack->push(firstValue * secondValue);
-					break;
+			float firstValue = stack->pop();
+			float secondValue = stack->pop();
+			stack->push(firstValue * secondValue);
+			break;
 		}
 		case '/':
 		{
-					float firstValue = stack->pop();
-					float secondValue = stack->pop();
-					stack->push(secondValue / firstValue);
-					break;
+			float firstValue = stack->pop();
+			float secondValue = stack->pop();
+			stack->push(secondValue / firstValue);
+			break;
 		}
 		default:
-					stack->push(atoi(storage));
+			stack->push(atoi(storage));
 		}
 	}
 	return stack->pop();

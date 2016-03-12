@@ -1,7 +1,7 @@
+QT       += core \
+    testlib
 TEMPLATE = app
 CONFIG += console c++11
-CONFIG -= app_bundle
-CONFIG -= qt
 
 SOURCES += main.cpp \
     calculator.cpp \
@@ -14,4 +14,7 @@ HEADERS += \
     stack.h \
     stackArray.h \
     stackPointer.h \
-    translator.h
+    translator.h \
+    stackTester.h \
+    translatorTester.h \
+    calculatorTester.h
