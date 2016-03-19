@@ -1,7 +1,7 @@
+QT       += core \
+    testlib
 TEMPLATE = app
 CONFIG += console c++11
-CONFIG -= app_bundle
-CONFIG -= qt
 
 SOURCES += main.cpp \
     listPointer.cpp \
@@ -11,4 +11,6 @@ SOURCES += main.cpp \
 HEADERS += \
     listPointer.h \
     listsComparator.h \
-    sortedSet.h
+    sortedSet.h \
+    setTester.h \
+    listTester.h
