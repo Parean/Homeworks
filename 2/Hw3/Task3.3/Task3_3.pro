@@ -4,16 +4,17 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Task3_3
 TEMPLATE = app
-CONFIG += c++11
+CONFIG += console c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+	mainwindow.cpp \
     calculator.cpp \
     translator.cpp \
     stackPointer.cpp
@@ -21,6 +22,9 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     calculator.h \
     translator.h \
-    stackPointer.h
+    stackPointer.h \
+    calculatorTester.h \
+    translatorTester.h \
+    stackTester.h
 
 FORMS    += mainwindow.ui

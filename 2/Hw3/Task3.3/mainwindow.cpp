@@ -74,7 +74,8 @@ void MainWindow::clear()
 
 void MainWindow::calculate()
 {
-	calculator = new Calculator(lineEdit->text().toUtf8().data());
+	QByteArray array = lineEdit->text().toLocal8Bit();
+	calculator = new Calculator(array.data());
 	QString string;
 	lineEdit->setText(string.setNum(calculator->calculation(), 'f', 2));
 	delete calculator;
