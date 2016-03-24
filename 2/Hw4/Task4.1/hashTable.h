@@ -6,6 +6,10 @@
 #include "hashLy.h"
 #include "hashRot13.h"
 
+/**
+ * @brief The KindOfFunction enum
+ * It contains the names of hash functions, which the user can select to calculate the hash
+ */
 enum KindOfFunction
 {
 	faq6,
@@ -21,9 +25,9 @@ class HashTable
 {
 public:
 	HashTable(int hashSize);
-	void addInTable(QString value);
-	void removeFromTable(QString value);
-	bool isPlaced(QString value) const;
+	void addInTable(QString &value);
+	void removeFromTable(QString &value);
+	bool isPlaced(QString &value) const;
 	void getStatistic() const;
 	int findMaxCollision() const;
 	void switchHashFunction(KindOfFunction kind);

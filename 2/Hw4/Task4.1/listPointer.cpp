@@ -3,10 +3,11 @@
 ListPointer::ListPointer()
 {
 	sizeOfList = 0;
-	list = new ListElement(0, nullptr);
+	QString string = 0;
+	list = new ListElement(string, nullptr);
 }
 
-void ListPointer::addInList(QString value)
+void ListPointer::addInList(QString &value)
 {
 	ListElement *temp = list;
 	while (temp->next)
@@ -20,7 +21,7 @@ void ListPointer::addInList(QString value)
 	sizeOfList++;
 }
 
-int ListPointer::findPositionOfValue(QString value) const
+int ListPointer::findPositionOfValue(QString &value) const
 {
 	ListElement *temp = list->next;
 	int position = 1;
@@ -46,7 +47,7 @@ QString ListPointer::pop()
 	return value;
 }
 
-bool ListPointer::removeValue(QString value)
+bool ListPointer::removeValue(QString &value)
 {
 	ListElement *temp = list;
 	while (temp->next != nullptr && QString::compare(value, temp->next->value, Qt::CaseSensitive) != 0)

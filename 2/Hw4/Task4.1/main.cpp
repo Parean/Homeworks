@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 #include "hashTable.h"
+#include "hashFunctionTester.h"
+#include "hashTableTester.h"
 
 enum
 {
@@ -12,13 +14,22 @@ enum
 	switchFunction
 };
 
+void testingOfComponents()
+{
+	HashFunctionTester hashFunctionTester;
+	QTest::qExec(&hashFunctionTester);
+	HashTableTester hashTableTester;
+	QTest::qExec(&hashTableTester);
+}
+
 int main()
 {
+	testingOfComponents();
 	HashTable *hashTable = new HashTable(50);
 	int state = -1;
 	int wordSize = 25;
 	char *string = new char[wordSize];
-	printf("This program tests the hash table functions\n\nMenu:\n\n"
+	printf("\n\n\nThis program tests the hash table functions\n\nMenu:\n\n"
 		   " 0 - Exit\n"
 		   " 1 - Add new element\n"
 		   " 2 - Check presence of element\n"
@@ -35,14 +46,16 @@ int main()
 		{
 			printf("\nEnter the value\n");
 			scanf("%s", string);
-			hashTable->addInTable(string);
+			QString qstring(string);
+			hashTable->addInTable(qstring);
 			break;
 		}
 		case check:
 		{
 			printf("\nEnter the value\n");
 			scanf("%s", string);
-			if (hashTable->isPlaced(string))
+			QString qstring(string);
+			if (hashTable->isPlaced(qstring))
 				printf("\nElement is placed\n");
 			else
 				printf("\nElement is not placed\n");
@@ -52,7 +65,8 @@ int main()
 		{
 			printf("\nEnter the value\n");
 			scanf("%s", string);
-			hashTable->removeFromTable(string);
+			QString qstring(string);
+			hashTable->removeFromTable(qstring);
 			break;
 		}
 		case statistic:

@@ -14,7 +14,7 @@ HashTable::HashTable(int hashSize):
 	hashFunction = new HashFaq6(hashTableSize);
 }
 
-void HashTable::addInTable(QString value)
+void HashTable::addInTable(QString &value)
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	hashTable[index]->addInList(value);
@@ -68,7 +68,7 @@ void HashTable::switchHashFunction(KindOfFunction kind)
 	hashTable = rebuilding(hashTableSize);
 }
 
-void HashTable::removeFromTable(QString value)
+void HashTable::removeFromTable(QString &value)
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	hashTable[index]->removeValue(value);
@@ -77,7 +77,7 @@ void HashTable::removeFromTable(QString value)
 	numberOfElements--;
 }
 
-bool HashTable::isPlaced(QString value) const
+bool HashTable::isPlaced(QString &value) const
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	return hashTable[index]->findPositionOfValue(value) != -1;
