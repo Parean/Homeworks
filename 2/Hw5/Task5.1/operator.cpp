@@ -28,7 +28,7 @@ void Operator::print() const
 	left->print();
 	cout << ' ';
 	right->print();
-	std::cout << ')';
+	cout << ')';
 }
 
 int Operator::calculate() const
