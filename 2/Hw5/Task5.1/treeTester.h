@@ -3,7 +3,7 @@
 #include <QtCore/QObject>
 #include <QtTest/QTest>
 
-#include "operator.h"
+#include "calculator.h"
 
 class TreeTester : public QObject
 {
@@ -19,7 +19,7 @@ private slots:
 	void init()
 	{
 		string = "(* (+ 1 1) (/ (- 9 3) 2)";
-		expression = new Operator(string);
+		expression = new Calculator(string);
 	}
 
 	void cleanup()
