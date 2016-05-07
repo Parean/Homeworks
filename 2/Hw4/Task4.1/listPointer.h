@@ -6,10 +6,10 @@ class ListPointer
 {
 public:
 	ListPointer();
-	void addInList(QString &value);
-	bool removeValue(QString &value);
+	void addInList(const QString &value);
+	bool removeValue(const QString &value);
 	QString pop();
-	int findPositionOfValue(QString &value) const;
+	int findPositionOfValue(const QString &value) const;
 	bool isEmpty() const;
 	int length() const;
 	~ListPointer();
@@ -19,7 +19,7 @@ private:
 		QString value;
 		ListElement *next;
 
-		ListElement(QString &string, ListElement *nextElement):
+		ListElement(const QString &string, ListElement *nextElement):
 			value(string),
 			next(nextElement)
 		{}

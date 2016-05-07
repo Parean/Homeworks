@@ -25,9 +25,9 @@ class HashTable
 {
 public:
 	HashTable(int hashSize);
-	void addInTable(QString &value);
-	void removeFromTable(QString &value);
-	bool isPlaced(QString &value) const;
+	void addInTable(const QString &value);
+	void removeFromTable(const QString &value);
+	bool isPlaced(const QString &value) const;
 	void getStatistic() const;
 	int findMaxCollision() const;
 	void switchHashFunction(KindOfFunction kind);

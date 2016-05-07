@@ -2,7 +2,7 @@
 
 HashFaq6::HashFaq6(int hashSize) : HashFunction(hashSize){}
 
-unsigned int HashFaq6::hashCalculate(QString &str, int hashTableSize) const
+unsigned int HashFaq6::hashCalculate(const QString &str, int hashTableSize) const
 {
 	QByteArray byteArray = str.toLocal8Bit();
 	char *string = byteArray.data();

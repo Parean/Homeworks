@@ -2,7 +2,7 @@
 
 HashLy::HashLy(int hashSize) : HashFunction(hashSize){}
 
-unsigned int HashLy::hashCalculate(QString &str, int hashTableSize) const
+unsigned int HashLy::hashCalculate(const QString &str, int hashTableSize) const
 {
 	QByteArray byteArray = str.toLocal8Bit();
 	char *string = byteArray.data();
