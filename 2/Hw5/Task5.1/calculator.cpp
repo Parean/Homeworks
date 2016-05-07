@@ -1,4 +1,4 @@
 #include "calculator.h"
 
-Calculator::Calculator(char *&string) : Operator(*&string)
+Calculator::Calculator(char *string) : Operator(*&string)
 {}

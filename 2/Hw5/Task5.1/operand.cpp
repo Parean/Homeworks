@@ -2,7 +2,8 @@
 
 Operand::Operand(char *&string)
 {
-	value = *string++ - '0';
+	while(*string != ' ' && *string != ')')
+		value = value * 10 + (*string++ - '0');
 }
 
 void Operand::print() const

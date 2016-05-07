@@ -16,19 +16,44 @@ private:
 	char *string;
 
 private slots:
-	void init()
-	{
-		string = "(* (+ 1 1) (/ (- 9 3) 2)";
-		expression = new Calculator(string);
-	}
 
 	void cleanup()
 	{
 		delete expression;
 	}
 
-	void testCalculation()
+	void testOfAddition()
 	{
+		string = "(+ 1 1)";
+		expression = new Calculator(string);
+		QVERIFY2(expression->calculate() == 2, "Incorrect result");
+	}
+
+	void testOfSubtraction()
+	{
+		string = "(- 1 1)";
+		expression = new Calculator(string);
+		QVERIFY2(expression->calculate() == 0, "Incorrect result");
+	}
+
+	void testOfMultiply()
+	{
+		string = "(* 7 5)";
+		expression = new Calculator(string);
+		QVERIFY2(expression->calculate() == 35, "Incorrect result");
+	}
+
+	void testOfDivision()
+	{
+		string = "(/ 35 5)";
+		expression = new Calculator(string);
+		QVERIFY2(expression->calculate() == 7, "Incorrect result");
+	}
+
+	void testOfExpression()
+	{
+		string = "(* (+ 1 1) (/ (- 9 3) 2)";
+		expression = new Calculator(string);
 		QVERIFY2(expression->calculate() == 6, "Incorrect result");
 	}
 };
