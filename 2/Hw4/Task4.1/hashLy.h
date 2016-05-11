@@ -12,6 +12,5 @@
 class HashLy : public HashFunction
 {
 public:
-	HashLy(int hashSize);
 	unsigned int hashCalculate(const QString &str, int hashTableSize) const;
 };

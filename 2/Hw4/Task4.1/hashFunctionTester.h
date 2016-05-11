@@ -14,27 +14,13 @@ public:
 	explicit HashFunctionTester(QObject *parent = 0) : QObject(parent) {}
 
 private:
-	HashFunction *hashLy;
-	HashFunction *hashRot13;
-	HashFunction *hashFaq6;
-	QString string;
+	HashFunction *hashLy = new HashLy();
+	HashFunction *hashRot13 = new HashRot13();
+	HashFunction *hashFaq6 = new HashFaq6();
+	QString string = "Value";
 	int size = 50;
 
 private slots:
-	void init()
-	{
-		hashLy = new HashLy(size);
-		hashFaq6 = new HashFaq6(size);
-		hashRot13 = new HashRot13(size);
-		string = "Value";
-	}
-
-	void cleanup()
-	{
-		delete hashLy;
-		delete hashRot13;
-		delete hashFaq6;
-	}
 
 	void testHashLyCalculate()
 	{

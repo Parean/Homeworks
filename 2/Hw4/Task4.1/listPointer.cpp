@@ -43,6 +43,7 @@ QString ListPointer::pop()
 	QString value = listElement->value;
 	list->next = list->next->next;
 	delete listElement;
+
 	sizeOfList--;
 	return value;
 }

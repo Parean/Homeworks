@@ -11,7 +11,7 @@ HashTable::HashTable(int hashSize):
 	{
 		hashTable[i] = new ListPointer;
 	}
-	hashFunction = new HashFaq6(hashTableSize);
+	hashFunction = new HashFaq6();
 }
 
 void HashTable::addInTable(const QString &value)
@@ -27,10 +27,10 @@ void HashTable::addInTable(const QString &value)
 
 ListPointer **HashTable::increaseHashTable()
 {
-	return rebuilding(hashTableSize * 2);
+	return rebuild(hashTableSize * 2);
 }
 
-ListPointer **HashTable::rebuilding(int sizeOfNewTable)
+ListPointer **HashTable::rebuild(int sizeOfNewTable)
 {
 	int index = 0;
 	ListPointer **newHashTable = new ListPointer *[sizeOfNewTable];
@@ -56,16 +56,16 @@ void HashTable::switchHashFunction(KindOfFunction kind)
 	switch (kindOfFunction)
 	{
 	case faq6:
-		hashFunction = new HashFaq6(hashTableSize);
+		hashFunction = new HashFaq6();
 		break;
 	case ly:
-		hashFunction = new HashLy(hashTableSize);
+		hashFunction = new HashLy();
 		break;
 	case rot:
-		hashFunction = new HashRot13(hashTableSize);
+		hashFunction = new HashRot13();
 		break;
 	}
-	hashTable = rebuilding(hashTableSize);
+	hashTable = rebuild(hashTableSize);
 }
 
 void HashTable::removeFromTable(const QString &value)

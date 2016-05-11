@@ -11,12 +11,8 @@
 class HashFunction
 {
 public:
-	HashFunction(int hashSize);
 
 	///@return a value in the interval from 0 to hashTableSize-1
 	virtual unsigned int hashCalculate(const QString &str, int hashTableSize) const = 0;
-
-private:
-	int hashTableSize;
 };
 

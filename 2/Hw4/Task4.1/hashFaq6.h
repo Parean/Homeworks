@@ -11,6 +11,5 @@
 class HashFaq6 : public HashFunction
 {
 public:
-	HashFaq6(int hashSize);
 	unsigned int hashCalculate(const QString &str, int hashTableSize) const;
 };

@@ -6,7 +6,6 @@ CONFIG -= app_bundle
 SOURCES += main.cpp \
     hashTable.cpp \
     listPointer.cpp \
-    hashFunction.cpp \
     hashRot13.cpp \
     hashLy.cpp \
     hashFaq6.cpp

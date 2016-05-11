@@ -49,10 +49,10 @@ private:
 	ListPointer **increaseHashTable();
 
 	/**
-	 * @brief rebuilding
+	 * @brief rebuild
 	 * The function is automatically called from functions "increaseHashTable"
 	 * and "switchHashFunction". It creates a new table and overwrites the data into it
 	 * @return New hashtable
 	 */
-	ListPointer **rebuilding(int sizeOfNewTable);
+	ListPointer **rebuild(int sizeOfNewTable);
 };

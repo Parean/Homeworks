@@ -13,14 +13,13 @@ public:
 
 private:
 	HashTable *hashTable;
-	QString string;
+	QString string = "Value";
 	int const size = 10000;
 
 private slots:
 	void init()
 	{
 		hashTable = new HashTable(50);
-		string = "Value";
 	}
 
 	void cleanup()
