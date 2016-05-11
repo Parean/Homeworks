@@ -12,7 +12,7 @@ public:
 	explicit TreeTester(QObject *parent = 0) : QObject(parent) {}
 
 private:
-	TreeNode *expression;
+	Calculator *expression;
 	char *string;
 
 private slots:
