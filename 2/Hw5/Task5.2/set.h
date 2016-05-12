@@ -59,10 +59,15 @@ private:
 
 	static void intersectionOfSets(TreeNode *firstSetNode, SortedSet<T> *secondSet, SortedSet<T> *newSet);
 	static void mergeOfSets(TreeNode *firstSetNode, SortedSet<T> *newSet);
-
 	void copySet(TreeNode *treeNode);
+
+	/**
+	 * The following functions change the value of the pointer treeNode in the tree,
+	 * so it is passed by reference
+	 */
 	void addInSet(TreeNode *&treeNode, const T &value);
 	void deleteElement(TreeNode *&treeNode, const T &value);
+	void balanceTree(TreeNode *&treeNode);
 
 	/**
 	 * @brief deleteTree
@@ -70,18 +75,16 @@ private:
 	 */
 	void deleteTree(TreeNode *&treeNode);
 	void setHeight(TreeNode *treeNode);
-	void balanceTree(TreeNode *&treeNode);
 
 	///rotate-functions return the new root of the subtree
 	TreeNode *rotateLeft(TreeNode *treeNode);
 	TreeNode *rotateRight(TreeNode *treeNode);
 
-	int getBalanceFactor(TreeNode *treeNode) const;
-
 	/**
 	 * @return height of current node, if node == nullptr, return 0
 	 */
 	int getHeight(TreeNode *treeNode) const;
+	int getBalanceFactor(TreeNode *treeNode) const;
 	void debugOutput(TreeNode *treeNode) const;
 	bool isPlaced(TreeNode *treeNode, const T &value) const;
 
@@ -89,6 +92,8 @@ private:
 	 * @brief removeElement
 	 * The function is called in the most difficult kind of the delete element
 	 * It find element of tree, which will take place of deleted
+	 * The function also shifts the descendants of this element, therefore,
+	 * treeNode is passed by reference
 	 */
 	TreeNode *removeElement(TreeNode *&treeNode);
 };
