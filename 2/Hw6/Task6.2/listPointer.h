@@ -1,21 +1,31 @@
 #pragma once
 
+/**
+ * @class ListPointer
+ * Template class which contains the implementation of the list on pointers
+ */
 template <typename T>
 class ListPointer
 {
 public:
 	ListPointer();
+	~ListPointer();
+
 	void addValue(const T &value);
 	void removeValue(const T &value);
 
 	int findPositionOfValue(const T &value) const;
 	bool isPlaced(const T &value) const;
 	bool isEmpty() const;
+
+	///@return number of elements in the list
 	int length() const;
 
-	~ListPointer();
-
 protected:
+	/**
+	 * @brief The ListElement struct
+	 * Represents a single list element
+	 */
 	struct ListElement
 	{
 		const T value;
