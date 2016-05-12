@@ -113,7 +113,11 @@ void SharedPtr<T>::swap(SharedPtr<T> &sharedPtr)
 template <typename T>
 void SharedPtr<T>::operator = (const SharedPtr<T> &sharedPtr)
 {
-	delete this;
+	storage->referenceCount--;
+
+	if (storage->referenceCount == 0)
+		delete storage;
+
 	this->storage = sharedPtr.storage;
 	this->storage->referenceCount++;
 }
