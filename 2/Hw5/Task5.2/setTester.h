@@ -27,10 +27,19 @@ private slots:
 		delete set;
 	}
 
-	void testAddInSet()
+	void testAddOneElementInSet()
 	{
 		set->addInSet(value);
 		QVERIFY2(set->isPlaced(value), "The element was not added");
+	}
+
+	void testManyElementsInSet()
+	{
+		for (int i = 0; i < value; i++)
+			set->addInSet(i);
+
+		for (int i = 0; i < value; i++)
+			QVERIFY2(set->isPlaced(i), "The element was not added");
 	}
 
 	void testIsPlacedInEmptySet()
@@ -62,6 +71,7 @@ private slots:
 		int const size = 10;
 		int firstArray[size];
 		int secondArray[size];
+
 		for(int i = 0; i < size; i++)
 		{
 			firstArray[i] = i;
@@ -69,11 +79,11 @@ private slots:
 			set->addInSet(firstArray[i]);
 			secondSet->addInSet(secondArray[i]);
 		}
+
 		SortedSet<int> *resultSet = SortedSet<int>::intersectionOfSets(set, secondSet);
 		for(int i = 0; i < 5; i++)
-		{
 			QVERIFY2(resultSet->isPlaced(i), "The function adds not all elements");
-		}
+
 		delete secondSet;
 		delete resultSet;
 	}
@@ -84,6 +94,7 @@ private slots:
 		int const size = 10;
 		int firstArray[size];
 		int secondArray[size];
+
 		for(int i = 0; i < size; i++)
 		{
 			firstArray[i] = i;
@@ -91,11 +102,11 @@ private slots:
 			set->addInSet(firstArray[i]);
 			secondSet->addInSet(secondArray[i]);
 		}
+
 		SortedSet<int> *resultSet = SortedSet<int>::mergeOfSets(set, secondSet);
 		for(int i = 0; i < 15; i++)
-		{
 			QVERIFY2(resultSet->isPlaced(i), "The function adds not all elements");
-		}
+
 		delete secondSet;
 		delete resultSet;
 	}

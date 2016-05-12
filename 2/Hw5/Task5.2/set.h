@@ -2,31 +2,19 @@
 
 #include <iostream>
 
-template <typename T>
-struct TreeNode
-{
-	T value;
-	int height;
-	TreeNode<T> *left;
-	TreeNode<T> *right;
-	TreeNode(T value):
-		value(value),
-		left(nullptr),
-		right(nullptr),
-		height(1)
-	{}
-};
-
 /**
  * @class SortedSet
  * Template class representing a sorted set is implemented on the AVL Tree
+ * All user-defined functions are overloaded to be able to run them, not
+ * only from the root of the tree, but also from any arbitrary node
  */
 template <typename T>
 class SortedSet
 {
 public:
 	SortedSet();
-	SortedSet(SortedSet<T> *&sortedSet);
+	SortedSet(SortedSet<T> *sortedSet);
+	~SortedSet();
 
 	/**
 	 * @brief intersectionOfSets
@@ -34,7 +22,7 @@ public:
 	 * elements from the intersection of the input sets
 	 * @return new set
 	 */
-	static SortedSet<T> *intersectionOfSets(SortedSet<T> *&firstSet, SortedSet<T> *&secondSet);
+	static SortedSet<T> *intersectionOfSets(SortedSet<T> *firstSet, SortedSet<T> *secondSet);
 
 	/**
 	 * @brief intersectionOfSets
@@ -42,62 +30,87 @@ public:
 	 * elements from the union of the input sets
 	 * @return new set
 	 */
-	static SortedSet<T> *mergeOfSets(SortedSet<T> *&firstSet, SortedSet<T> *&secondSet);
+	static SortedSet<T> *mergeOfSets(SortedSet<T> *firstSet, SortedSet<T> *secondSet);
 
 	/**
 	 * @brief copySet
 	 * The function adds to the set all elements from the input set
 	 */
-	bool isPlaced(T &value);
-	void addInSet(T &value);
-	void copySet(SortedSet<T> *&sortedSet);
-	void deleteElement(T &value);
-	void debugOutput();
-	~SortedSet();
+	void copySet(SortedSet<T> *sortedSet);
+	void addInSet(const T &value);
+	void deleteElement(const T &value);
+
+	void debugOutput() const;
+	bool isPlaced(const T &value) const;
 
 private:
-	TreeNode<T> *tree;
+	struct TreeNode
+	{
+		const T value;
+		int height = 1;
+		TreeNode *left = nullptr;
+		TreeNode *right = nullptr;
 
-	static void intersectionOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *&secondSet, SortedSet<T> *&newSet);
-	static void mergeOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *&newSet);
-	void copySet(TreeNode<T> *&treeNode);
-	bool isPlaced(TreeNode<T> *treeNode, T &value);
-	TreeNode<T> *addInSet(TreeNode<T> *&treeNode, T &value);
-	TreeNode<T> *deleteElement(TreeNode<T> *&treeNode, T &value);
-	void debugOutput(TreeNode<T> *treeNode) const;
-	void deleteTree(TreeNode<T> *&treeNode);
-	TreeNode<T> *balanceTree(TreeNode<T> *treeNode);
-	TreeNode<T> *rotateLeft(TreeNode<T> *&treeNode);
-	TreeNode<T> *rotateRight(TreeNode<T> *&treeNode);
-	int getHeight(TreeNode<T> *treeNode) const;
-	int getBalanceFactor(TreeNode<T> *treeNode) const;
-	void setTheHeight(TreeNode<T> *treeNode) const;
+		TreeNode(const T value):
+			value(value)
+		{}
+	};
+	TreeNode *tree;
+
+	static void intersectionOfSets(TreeNode *firstSetNode, SortedSet<T> *secondSet, SortedSet<T> *newSet);
+	static void mergeOfSets(TreeNode *firstSetNode, SortedSet<T> *newSet);
+
+	void copySet(TreeNode *treeNode);
+	void addInSet(TreeNode *&treeNode, const T &value);
+	void deleteElement(TreeNode *&treeNode, const T &value);
 
 	/**
-	 * The function is called in the most difficult kind of the delete element
-	 * @return element of tree, which will take place of deleted
+	 * @brief deleteTree
+	 * The function which deletes the tree rooted at the current node
 	 */
-	TreeNode<T> *removeElement(TreeNode<T> *treeNode, TreeNode<T> *&temp);
+	void deleteTree(TreeNode *&treeNode);
+	void setHeight(TreeNode *treeNode);
+	void balanceTree(TreeNode *&treeNode);
+
+	///rotate-functions return the new root of the subtree
+	TreeNode *rotateLeft(TreeNode *treeNode);
+	TreeNode *rotateRight(TreeNode *treeNode);
+
+	int getBalanceFactor(TreeNode *treeNode) const;
+
+	/**
+	 * @return height of current node, if node == nullptr, return 0
+	 */
+	int getHeight(TreeNode *treeNode) const;
+	void debugOutput(TreeNode *treeNode) const;
+	bool isPlaced(TreeNode *treeNode, const T &value) const;
+
+	/**
+	 * @brief removeElement
+	 * The function is called in the most difficult kind of the delete element
+	 * It find element of tree, which will take place of deleted
+	 */
+	TreeNode *removeElement(TreeNode *&treeNode);
 };
 
 template <typename T>
 SortedSet<T>::SortedSet() : tree(nullptr) {}
 
 template <typename T>
-SortedSet<T>::SortedSet(SortedSet<T> *&sortedSet) :
+SortedSet<T>::SortedSet(SortedSet<T> *sortedSet) :
 	tree(nullptr)
 {
 	copySet(sortedSet);
 }
 
 template <typename T>
-void SortedSet<T>::copySet(SortedSet<T> *&sortedSet)
+void SortedSet<T>::copySet(SortedSet<T> *sortedSet)
 {
 	copySet(sortedSet->tree);
 }
 
 template <typename T>
-void SortedSet<T>::copySet(TreeNode<T> *&treeNode)
+void SortedSet<T>::copySet(TreeNode *treeNode)
 {
 	if (treeNode)
 	{
@@ -108,7 +121,7 @@ void SortedSet<T>::copySet(TreeNode<T> *&treeNode)
 }
 
 template <typename T>
-SortedSet<T> *SortedSet<T>::intersectionOfSets(SortedSet<T> *&firstSet, SortedSet<T> *&secondSet)
+SortedSet<T> *SortedSet<T>::intersectionOfSets(SortedSet<T> *firstSet, SortedSet<T> *secondSet)
 {
 	SortedSet<T> *newSet = new SortedSet<T>;
 	intersectionOfSets(firstSet->tree, secondSet, newSet);
@@ -116,7 +129,7 @@ SortedSet<T> *SortedSet<T>::intersectionOfSets(SortedSet<T> *&firstSet, SortedSe
 }
 
 template <typename T>
-void SortedSet<T>::intersectionOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *&secondSet, SortedSet<T> *&newSet)
+void SortedSet<T>::intersectionOfSets(TreeNode *firstSetNode, SortedSet<T> *secondSet, SortedSet<T> *newSet)
 {
 	if (firstSetNode)
 	{
@@ -128,7 +141,7 @@ void SortedSet<T>::intersectionOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *
 }
 
 template <typename T>
-SortedSet<T> *SortedSet<T>::mergeOfSets(SortedSet<T> *&firstSet, SortedSet<T> *&secondSet)
+SortedSet<T> *SortedSet<T>::mergeOfSets(SortedSet<T> *firstSet, SortedSet<T> *secondSet)
 {
 	SortedSet<T> *newSet = new SortedSet<T>(secondSet);
 	mergeOfSets(firstSet->tree, newSet);
@@ -137,7 +150,7 @@ SortedSet<T> *SortedSet<T>::mergeOfSets(SortedSet<T> *&firstSet, SortedSet<T> *&
 }
 
 template <typename T>
-void SortedSet<T>::mergeOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *&newSet)
+void SortedSet<T>::mergeOfSets(TreeNode *firstSetNode, SortedSet<T> *newSet)
 {
 	if (firstSetNode)
 	{
@@ -148,18 +161,20 @@ void SortedSet<T>::mergeOfSets(TreeNode<T> *&firstSetNode, SortedSet<T> *&newSet
 }
 
 template <typename T>
-bool SortedSet<T>::isPlaced(T &value)
+bool SortedSet<T>::isPlaced(const T &value) const
 {
 	return isPlaced(tree, value);
 }
 
 template <typename T>
-bool SortedSet<T>::isPlaced(TreeNode<T> *treeNode, T &value)
+bool SortedSet<T>::isPlaced(TreeNode *treeNode, const T &value) const
 {
 	if (!treeNode)
 		return false;
+
 	if (treeNode->value == value)
 		return true;
+
 	if (treeNode->value > value)
 		return isPlaced(treeNode->left, value);
 	else
@@ -167,104 +182,105 @@ bool SortedSet<T>::isPlaced(TreeNode<T> *treeNode, T &value)
 }
 
 template <typename T>
-void SortedSet<T>::addInSet(T &value)
+void SortedSet<T>::addInSet(const T &value)
 {
 	addInSet(tree, value);
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::addInSet(TreeNode<T> *&treeNode, T &value)
+void SortedSet<T>::addInSet(TreeNode *&treeNode, const T &value)
 {
 	if (!treeNode)
 	{
-		if (!tree)
-			return tree = new TreeNode<T>(value);
-		return new TreeNode<T>(value);
+		treeNode = new TreeNode(value);
+		return;
 	}
+
 	if (treeNode->value > value)
-		treeNode->left = addInSet(treeNode->left, value);
+		addInSet(treeNode->left, value);
+	else if (treeNode->value < value)
+		addInSet(treeNode->right, value);
 	else
-		treeNode->right = addInSet(treeNode->right, value);
-	return treeNode = balanceTree(treeNode);
+		return;
+
+	balanceTree(treeNode);
 }
 
 template <typename T>
-void SortedSet<T>::deleteElement(T &value)
+void SortedSet<T>::deleteElement(const T &value)
 {
 	if (tree)
-	{
 		deleteElement(tree, value);
-	}
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::deleteElement(TreeNode<T> *&treeNode, T &value)
+void SortedSet<T>::deleteElement(TreeNode *&treeNode, const T &value)
 {
 	if (!treeNode)
-		return 0;
+		return;
 
 	else if (treeNode->value > value)
-		return deleteElement(treeNode->left, value);
+		deleteElement(treeNode->left, value);
 
 	else if (treeNode->value < value)
-		return deleteElement(treeNode->right, value);
+		deleteElement(treeNode->right, value);
 
 	else if (treeNode->value == value)
 	{
-		if (treeNode->left == nullptr && treeNode->right == nullptr)
+		if ((treeNode->left == nullptr) && (treeNode->right == nullptr))
 		{
 			delete treeNode;
 			treeNode = nullptr;
 		}
-		else if (treeNode->left == nullptr && treeNode->right != nullptr ||
-				 treeNode->left != nullptr && treeNode->right == nullptr)
+		else if (((treeNode->left == nullptr) && (treeNode->right != nullptr)) ||
+				 ((treeNode->left != nullptr) && (treeNode->right == nullptr)))
 		{
 			if (treeNode->left)
 			{
-				TreeNode<T> *temp = treeNode->left;
+				TreeNode *temp = treeNode->left;
 				delete treeNode;
 				treeNode = temp;
 			}
 			if (treeNode->right)
 			{
-				TreeNode<T> *temp = treeNode->right;
+				TreeNode *temp = treeNode->right;
 				delete treeNode;
 				treeNode = temp;
 			}
-			return balanceTree(treeNode);
 		}
-		else if (treeNode->left != nullptr && treeNode->right != nullptr)
+		else if ((treeNode->left != nullptr) && (treeNode->right != nullptr))
 		{
-			TreeNode<T> *temp = nullptr;
-			treeNode->right = removeElement(treeNode->right, temp);
-			TreeNode<T> *left = treeNode->left;
-			TreeNode<T> *right = treeNode->right;
+			TreeNode *element = removeElement(treeNode->right);
+			TreeNode *left = treeNode->left;
+			TreeNode *right = treeNode->right;
+
 			delete treeNode;
-			treeNode = temp;
+			treeNode = element;
 			treeNode->left = left;
 			treeNode->right = right;
-			return balanceTree(treeNode);
 		}
+
+		balanceTree(treeNode);
 	}
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::removeElement(TreeNode<T> *treeNode, TreeNode<T> *&temp)
+typename SortedSet<T>::TreeNode *SortedSet<T>::removeElement(TreeNode *&treeNode)
 {
-	if (treeNode->left != nullptr)
-	{
-		treeNode->left = removeElement(treeNode->left, temp);
-	}
+	if (!treeNode->left)
+		return removeElement(treeNode->left);
 	else
 	{
-		temp = treeNode;
-		return treeNode->right;
+		TreeNode *element = treeNode;
+		treeNode = treeNode->right;
+		return element;
 	}
-	return balanceTree(treeNode);
+
+	balanceTree(treeNode);
 }
 
 template <typename T>
-int SortedSet<T>::getHeight(TreeNode<T> *treeNode) const
+int SortedSet<T>::getHeight(TreeNode *treeNode) const
 {
 	if (!treeNode)
 		return 0;
@@ -273,16 +289,17 @@ int SortedSet<T>::getHeight(TreeNode<T> *treeNode) const
 }
 
 template <typename T>
-int SortedSet<T>::getBalanceFactor(TreeNode<T> *treeNode) const
+int SortedSet<T>::getBalanceFactor(TreeNode *treeNode) const
 {
 	return getHeight(treeNode->right) - getHeight(treeNode->left);
 }
 
 template <typename T>
-void SortedSet<T>::setTheHeight(TreeNode<T> *treeNode) const
+void SortedSet<T>::setHeight(TreeNode *treeNode)
 {
 	int heightLeft = getHeight(treeNode->left);
 	int heightRight = getHeight(treeNode->right);
+
 	if (heightLeft > heightRight)
 		treeNode->height = heightLeft + 1;
 	else
@@ -290,70 +307,77 @@ void SortedSet<T>::setTheHeight(TreeNode<T> *treeNode) const
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::rotateLeft(TreeNode<T> *&treeNode)
+typename SortedSet<T>::TreeNode *SortedSet<T>::rotateLeft(TreeNode *treeNode)
 {
-	TreeNode<T> *temp = treeNode->right;
+	TreeNode *temp = treeNode->right;
 	treeNode->right = temp->left;
 	temp->left = treeNode;
-	setTheHeight(treeNode);
-	setTheHeight(temp);
+
+	setHeight(treeNode);
+	setHeight(temp);
+
 	return temp;
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::rotateRight(TreeNode<T> *&treeNode)
+typename SortedSet<T>::TreeNode *SortedSet<T>::rotateRight(TreeNode *treeNode)
 {
-	TreeNode<T> *temp = treeNode->left;
+	TreeNode *temp = treeNode->left;
 	treeNode->left = temp->right;
 	temp->right = treeNode;
-	setTheHeight(treeNode);
-	setTheHeight(temp);
+
+	setHeight(treeNode);
+	setHeight(temp);
+
 	return temp;
 }
 
 template <typename T>
-TreeNode<T> *SortedSet<T>::balanceTree(TreeNode<T> *treeNode)
+void SortedSet<T>::balanceTree(TreeNode *&treeNode)
 {
-	setTheHeight(treeNode);
+	if(!treeNode)
+		return;
+
+	setHeight(treeNode);
+
 	if (getBalanceFactor(treeNode) == 2)
 	{
 		if (getBalanceFactor(treeNode->right) < 0)
 			treeNode->right = rotateRight(treeNode->right);
-		return rotateLeft(treeNode);
+		treeNode = rotateLeft(treeNode);
 	}
+
 	if (getBalanceFactor(treeNode) == -2)
 	{
 		if (getBalanceFactor(treeNode->left) > 0)
 			treeNode->left = rotateLeft(treeNode->left);
-		return rotateRight(treeNode);
+		treeNode = rotateRight(treeNode);
 	}
-	return treeNode;
 }
 
 template <typename T>
-void SortedSet<T>::debugOutput()
+void SortedSet<T>::debugOutput() const
 {
 	if (tree)
 		debugOutput(tree);
 }
 
 template <typename T>
-void SortedSet<T>::debugOutput(TreeNode<T> *treeNode) const
+void SortedSet<T>::debugOutput(TreeNode *treeNode) const
 {
 	std::cout << "(";
 	std::cout << treeNode->value << " ";
-	if (treeNode->left != nullptr)
-	{
+
+	if (!treeNode->left)
 		debugOutput(treeNode->left);
-	}
 	else
 		std::cout << "null ";
-	if (treeNode->right != nullptr)
-	{
+
+	if (!treeNode->right)
 		debugOutput(treeNode->right);
-	}
 	else
 		std::cout << "null";
+
 	std::cout << ")";
 }
 
@@ -364,18 +388,20 @@ SortedSet<T>::~SortedSet()
 }
 
 template <typename T>
-void SortedSet<T>::deleteTree(TreeNode<T> *&treeNode)
+void SortedSet<T>::deleteTree(TreeNode *&treeNode)
 {
-	if (treeNode)
+	if (!treeNode)
+		return;
+
+	if (treeNode->left != nullptr)
+		deleteTree(treeNode->left);
+
+	if (treeNode->right != nullptr)
+		deleteTree(treeNode->right);
+
+	if ((treeNode->left == nullptr) && (treeNode->right == nullptr))
 	{
-		if (treeNode->left != nullptr)
-			deleteTree(treeNode->left);
-		if (treeNode->right != nullptr)
-			deleteTree(treeNode->right);
-		if (treeNode->left == nullptr && treeNode->right == nullptr)
-		{
-			delete treeNode;
-			treeNode = nullptr;
-		}
+		delete treeNode;
+		treeNode = nullptr;
 	}
 }
