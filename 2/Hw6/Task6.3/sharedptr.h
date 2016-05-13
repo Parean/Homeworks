@@ -47,6 +47,12 @@ public:
 	 */
 	void operator = (const SharedPtr<T> &sharedPtr);
 
+	/**
+	 * @brief deleteOnePointer
+	 * This function is called when the number of pointers to the managed object is reduced
+	 */
+	void deleteOnePointer();
+
 	~SharedPtr();
 
 private:
@@ -113,10 +119,7 @@ void SharedPtr<T>::swap(SharedPtr<T> &sharedPtr)
 template <typename T>
 void SharedPtr<T>::operator = (const SharedPtr<T> &sharedPtr)
 {
-	storage->referenceCount--;
-
-	if (storage->referenceCount == 0)
-		delete storage;
+	deleteOnePointer();
 
 	this->storage = sharedPtr.storage;
 	this->storage->referenceCount++;
@@ -129,10 +132,16 @@ T &SharedPtr<T>::operator * () const
 }
 
 template <typename T>
-SharedPtr<T>::~SharedPtr()
+void SharedPtr<T>::deleteOnePointer()
 {
 	storage->referenceCount--;
 
 	if (storage->referenceCount == 0)
 		delete storage;
+}
+
+template <typename T>
+SharedPtr<T>::~SharedPtr()
+{
+	deleteOnePointer();
 }
