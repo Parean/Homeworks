@@ -22,6 +22,13 @@ private:
 
 private slots:
 
+	void cleanupTestCase()
+	{
+		delete hashLy;
+		delete hashRot13;
+		delete hashFaq6;
+	}
+
 	void testHashLyCalculate()
 	{
 		QVERIFY2(hashLy->hashCalculate(string, size) == 34, "Function return incorrect value");

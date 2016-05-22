@@ -11,5 +11,8 @@
 class HashRot13 : public HashFunction
 {
 public:
+	HashRot13() {}
+	~HashRot13() {}
+
 	unsigned int hashCalculate(const QString &str, int hashTableSize) const;
 };

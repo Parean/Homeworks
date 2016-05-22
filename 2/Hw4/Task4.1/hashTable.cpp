@@ -1,10 +1,10 @@
 #include "hashTable.h"
 
 HashTable::HashTable(int hashSize):
+	kindOfFunction(faq6),
 	hashTableSize(hashSize),
-	numberOfElements(0),
 	numberOfCollisions(0),
-	kindOfFunction(faq6)
+	numberOfElements(0)
 {
 	hashTable = new ListPointer *[hashTableSize];
 	for (int i = 0; i < hashTableSize; i++)
