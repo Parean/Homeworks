@@ -58,7 +58,7 @@ private slots:
 		QVERIFY2(!QString::compare(message, "Player X win"), "Incorrect winner");
 	}
 
-	void testMaindiagonal()
+	void testMainDiagonal()
 	{
 		for (int i = 0; i < 5; i++)
 		{
