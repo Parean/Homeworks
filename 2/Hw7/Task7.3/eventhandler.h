@@ -83,7 +83,7 @@ private:
 	 */
 	bool isSmbWin() const;
 
-	///All these funtions returns true if chain is winning
+	///All these funtions return true if chain is winning
 	bool checkColumn() const;
 	bool checkString() const;
 	bool checkMainDiagonal() const;

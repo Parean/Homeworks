@@ -5,8 +5,8 @@
 
 int main(int argc, char *argv[])
 {
-//	GameTester tester;
-//	QTest::qExec(&tester);
+	GameTester tester;
+	QTest::qExec(&tester);
 
 	QApplication a(argc, argv);
 	MainWindow w;
