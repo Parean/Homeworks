@@ -26,7 +26,6 @@ public:
 
 signals:
 	void startGame() const;
-	void finishGame() const;
 
 private slots:
 	/**
