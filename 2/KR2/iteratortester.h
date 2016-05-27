@@ -94,7 +94,7 @@ private slots:
 	void testIsEmpty()
 	{
 		QVERIFY2(!iterator->isEmpty(), "Not all elements have been viewed");
-		for (int i = 0; i < 25; i++)
+		for (int i = 0; i < 10; i++)
 			iterator->next();
 
 		QVERIFY2(iterator->isEmpty(), "All elements viewed, but the function return false");
