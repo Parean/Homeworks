@@ -70,10 +70,10 @@ private slots:
 
 	void fullByPassOfTree()
 	{
-		for (int i = 0; i < 25; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			auto node = iterator->next();
-			QVERIFY2(tree->isPlaced(node.getValue()), "Returned element which doesn`t place in the tree");
+			QVERIFY2(iterator->getTree()->isPlaced(node.getValue()), "Returned element which doesn`t place in the tree");
 		}
 	}
 
