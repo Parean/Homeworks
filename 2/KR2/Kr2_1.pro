@@ -1,10 +1,9 @@
 TEMPLATE = app
 CONFIG += console c++11
-QT += core \
-testlib
+QT += testlib
 
 SOURCES += main.cpp
 
 HEADERS += \
-    bubbleSorter.h \
-    sorterTester.h
+    tree.h \
+    iteratortester.h

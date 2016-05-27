@@ -1,7 +1,7 @@
-#include "sorterTester.h"
+#include "iteratortester.h"
 
 int main()
 {
-	SorterTester sorterTester;
-	QTest::qExec(&sorterTester);
+	IteratorTester iteratorTester;
+	QTest::qExec(&iteratorTester);
 }
