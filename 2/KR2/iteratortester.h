@@ -42,11 +42,13 @@ private slots:
 
 		Tree<int>::Iterator *oneNodeIterator = new Tree<int>::Iterator(oneNodeTree);
 		oneNodeIterator->remove();
+
 		Tree<int>::TreeNode treeNode = oneNodeIterator->next();
 		if(treeNode.getValue())
 		{
 			QVERIFY2(false, "The function must return zero");
 		}
+
 		delete oneNodeIterator;
 		delete oneNodeTree;
 	}
@@ -112,6 +114,6 @@ private slots:
 	void testRemove()
 	{
 		iterator->remove();
-		QVERIFY2(!iterator->getTree()->isPlaced(15), "Element was not deleted");
+		QVERIFY2(!iterator->getTree()->isPlaced(3), "Element was not deleted");
 	}
 };
