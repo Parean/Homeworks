@@ -21,17 +21,13 @@ private slots:
 	{
 		for (int i = 0; i < 10; i++)
 			tree->addInTree(i);
+		iterator = new Tree<int>::Iterator(tree);
 	}
 
 	void cleanupTestCase()
 	{
 		delete tree;
 		delete iterator;
-	}
-
-	void init()
-	{
-		iterator = new Tree<int>::Iterator(tree);
 	}
 
 	void cleanup()

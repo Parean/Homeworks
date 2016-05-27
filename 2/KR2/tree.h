@@ -462,6 +462,7 @@ template <typename T>
 void Tree<T>::Iterator::reset()
 {
 	isFinished = false;
+	stack.clear();
 	treeNode = tree->root;
 }
 
