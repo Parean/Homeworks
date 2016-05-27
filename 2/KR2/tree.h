@@ -51,6 +51,7 @@ public:
 		 * The constructor takes a tree and create a new tree, where you can make round
 		 */
 		Iterator(Tree<T> *initTree);
+		~Iterator();
 
 		/**
 		 * @brief next
@@ -423,6 +424,13 @@ Tree<T>::Iterator::Iterator(Tree<T> *initTree)
 	tree = new Tree<T>(initTree);
 	treeNode = tree->root;
 }
+
+template <typename T>
+Tree<T>::Iterator::~Iterator()
+{
+	delete tree;
+}
+
 
 template <typename T>
 typename Tree<T>::TreeNode Tree<T>::Iterator::next()
