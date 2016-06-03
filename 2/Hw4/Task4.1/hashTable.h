@@ -25,9 +25,15 @@ class HashTable
 {
 public:
 	HashTable(int hashSize);
+<<<<<<< HEAD
 	void addInTable(QString &value);
 	void removeFromTable(QString &value);
 	bool isPlaced(QString &value) const;
+=======
+	void addInTable(const QString &value);
+	void removeFromTable(const QString &value);
+	bool isPlaced(const QString &value) const;
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 	void getStatistic() const;
 	int findMaxCollision() const;
 	void switchHashFunction(KindOfFunction kind);
@@ -49,10 +55,18 @@ private:
 	ListPointer **increaseHashTable();
 
 	/**
+<<<<<<< HEAD
 	 * @brief rebuilding
+=======
+	 * @brief rebuild
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 	 * The function is automatically called from functions "increaseHashTable"
 	 * and "switchHashFunction". It creates a new table and overwrites the data into it
 	 * @return New hashtable
 	 */
+<<<<<<< HEAD
 	ListPointer **rebuilding(int sizeOfNewTable);
+=======
+	ListPointer **rebuild(int sizeOfNewTable);
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 };

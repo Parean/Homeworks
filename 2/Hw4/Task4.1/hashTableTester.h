@@ -13,14 +13,21 @@ public:
 
 private:
 	HashTable *hashTable;
+<<<<<<< HEAD
 	QString string;
+=======
+	QString string = "Value";
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 	int const size = 10000;
 
 private slots:
 	void init()
 	{
 		hashTable = new HashTable(50);
+<<<<<<< HEAD
 		string = "Value";
+=======
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 	}
 
 	void cleanup()

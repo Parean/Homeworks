@@ -14,6 +14,7 @@ public:
 	explicit HashFunctionTester(QObject *parent = 0) : QObject(parent) {}
 
 private:
+<<<<<<< HEAD
 	HashFunction *hashLy;
 	HashFunction *hashRot13;
 	HashFunction *hashFaq6;
@@ -30,6 +31,17 @@ private slots:
 	}
 
 	void cleanup()
+=======
+	HashFunction *hashLy = new HashLy();
+	HashFunction *hashRot13 = new HashRot13();
+	HashFunction *hashFaq6 = new HashFaq6();
+	QString string = "Value";
+	int size = 50;
+
+private slots:
+
+	void cleanupTestCase()
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 	{
 		delete hashLy;
 		delete hashRot13;
