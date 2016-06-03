@@ -1,4 +1,5 @@
 #pragma once
+
 #include "stack.h"
 
 class StackPointer:	public Stack
@@ -12,6 +13,7 @@ public:
 	bool isEmpty() const;
 	int length() const;
 	~StackPointer();
+
 private:
 	struct StackElement
 	{

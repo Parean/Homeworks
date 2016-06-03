@@ -1,4 +1,5 @@
 #pragma once
+
 #include "stackArray.h"
 #include "stackPointer.h"
 
@@ -9,11 +10,12 @@
 class Translator
 {
 public:
-    Translator(KindOfStack kind, char *string);
+	Translator(KindOfStack kind, char *string);
 
-    /// @return The expression in the Polish notation
-    char *translation();
+	/// @return The expression in the Polish notation
+	char *translation();
 	~Translator();
+
 private:
 	Stack *stack;
 	char *inputString;

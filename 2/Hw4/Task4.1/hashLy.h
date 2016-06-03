@@ -12,8 +12,13 @@
 class HashLy : public HashFunction
 {
 public:
+<<<<<<< HEAD
+	HashLy(int hashSize);
+	unsigned int hashCalculate(QString &str, int hashTableSize) const;
+=======
 	HashLy() {}
 	~HashLy() {}
 
 	unsigned int hashCalculate(const QString &str, int hashTableSize) const;
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 };

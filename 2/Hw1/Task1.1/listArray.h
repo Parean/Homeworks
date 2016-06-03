@@ -1,4 +1,5 @@
 #pragma once
+
 #include "list.h"
 
 class ListArray : public List
@@ -14,12 +15,12 @@ public:
 private:
 	int *listArray;
 	int sizeOfList;
-    int numberOfElements;
+	int numberOfElements;
 
-    /**
-     * The function is called when the array is full
-     * and increases its size by half
-     */
-    void increaseList();
+	/**
+	 * The function is called when the array is full
+	 * and increases its size by half
+	 */
+	void increaseList();
 };
 

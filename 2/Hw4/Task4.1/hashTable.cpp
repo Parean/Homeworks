@@ -1,20 +1,34 @@
 #include "hashTable.h"
 
 HashTable::HashTable(int hashSize):
+<<<<<<< HEAD
+	hashTableSize(hashSize),
+	numberOfElements(0),
+	numberOfCollisions(0),
+	kindOfFunction(faq6)
+=======
 	kindOfFunction(faq6),
 	hashTableSize(hashSize),
 	numberOfCollisions(0),
 	numberOfElements(0)
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 {
 	hashTable = new ListPointer *[hashTableSize];
 	for (int i = 0; i < hashTableSize; i++)
 	{
 		hashTable[i] = new ListPointer;
 	}
+<<<<<<< HEAD
+	hashFunction = new HashFaq6(hashTableSize);
+}
+
+void HashTable::addInTable(QString &value)
+=======
 	hashFunction = new HashFaq6();
 }
 
 void HashTable::addInTable(const QString &value)
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	hashTable[index]->addInList(value);
@@ -27,10 +41,17 @@ void HashTable::addInTable(const QString &value)
 
 ListPointer **HashTable::increaseHashTable()
 {
+<<<<<<< HEAD
+	return rebuilding(hashTableSize * 2);
+}
+
+ListPointer **HashTable::rebuilding(int sizeOfNewTable)
+=======
 	return rebuild(hashTableSize * 2);
 }
 
 ListPointer **HashTable::rebuild(int sizeOfNewTable)
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 {
 	int index = 0;
 	ListPointer **newHashTable = new ListPointer *[sizeOfNewTable];
@@ -56,6 +77,21 @@ void HashTable::switchHashFunction(KindOfFunction kind)
 	switch (kindOfFunction)
 	{
 	case faq6:
+<<<<<<< HEAD
+		hashFunction = new HashFaq6(hashTableSize);
+		break;
+	case ly:
+		hashFunction = new HashLy(hashTableSize);
+		break;
+	case rot:
+		hashFunction = new HashRot13(hashTableSize);
+		break;
+	}
+	hashTable = rebuilding(hashTableSize);
+}
+
+void HashTable::removeFromTable(QString &value)
+=======
 		hashFunction = new HashFaq6();
 		break;
 	case ly:
@@ -69,6 +105,7 @@ void HashTable::switchHashFunction(KindOfFunction kind)
 }
 
 void HashTable::removeFromTable(const QString &value)
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	hashTable[index]->removeValue(value);
@@ -77,7 +114,11 @@ void HashTable::removeFromTable(const QString &value)
 	numberOfElements--;
 }
 
+<<<<<<< HEAD
+bool HashTable::isPlaced(QString &value) const
+=======
 bool HashTable::isPlaced(const QString &value) const
+>>>>>>> ab9fd23beebbb101d40b5e5aef414f296a03f3d8
 {
 	unsigned int index = hashFunction->hashCalculate(value, hashTableSize);
 	return hashTable[index]->findPositionOfValue(value) != -1;
