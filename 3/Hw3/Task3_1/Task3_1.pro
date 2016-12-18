@@ -13,11 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    scene.cpp \
+    gamelogic.cpp \
+    cannon.cpp \
+    littlecannonball.cpp
 
-HEADERS  += mainwindow.h
-
-FORMS    += mainwindow.ui
+HEADERS  += mainwindow.h \
+    scene.h \
+    gamelogic.h \
+    cannon.h \
+    scenesize.h \
+    cannonball.h \
+    littlecannonball.h
 
 RESOURCES += \
     resources.qrc

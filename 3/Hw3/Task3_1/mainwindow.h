@@ -1,7 +1,8 @@
 #pragma once
 
+#include "gamelogic.h"
+
 #include <QMainWindow>
-#include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QShortcut>
 
@@ -18,9 +19,9 @@ public:
     ~MainWindow();
 
 private:
-    QGraphicsScene scene;
-    QGraphicsView *graphicsView = new QGraphicsView(&scene, this);
+    GameLogic gameLogic;
 
+    QGraphicsView *view = nullptr;
     QShortcut *up = new QShortcut(Qt::Key_Up, this);
     QShortcut *down = new QShortcut(Qt::Key_Down, this);
     QShortcut *left = new QShortcut(Qt::Key_Left, this);
