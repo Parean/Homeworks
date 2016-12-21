@@ -1,10 +1,10 @@
 #include "scene.h"
 
 #include <QPixmap>
-#include <QImage>
 #include <QGraphicsPixmapItem>
 
-Scene::Scene(int numPlayers):
+Scene::Scene(int numPlayers, QObject *parent):
+    QObject(parent),
     numCannons(numPlayers)
 {
     QPixmap landscape;
@@ -24,11 +24,31 @@ void Scene::addCannons()
     SceneSize sceneSize(scene->width(), scene->height());
     for (int i = 0; i < numCannons; i++)
     {
-        Cannon *cannon = new Cannon(sceneSize);
+        QGraphicsPixmapItem *cannonItem = new QGraphicsPixmapItem(Cannon::getPixmap());
+        QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(LittleCannonBall::getPixmap());
+        CannonBall *cannonBall = new LittleCannonBall(sceneSize, cannonItem, cannonBallItem);
+        connect(cannonBall, &CannonBall::cannonBallHit, this, &Scene::cannonBallHit);
+
+        scene->addItem(cannonItem);
+        Cannon *cannon = new Cannon(sceneSize, cannonItem, cannonBall);
         cannons.append(cannon);
-        scene->addItem(cannon->getCannon());
-        cannon->setInitialPos();
     }
+}
+
+void Scene::cannonShot(int id)
+{
+    if(flyingCannonBall)
+        return;
+
+    flyingCannonBall = cannons[id]->getCannonBallItem();
+    scene->addItem(flyingCannonBall);
+    cannons[id]->shot(direction);
+}
+
+void Scene::cannonBallHit()
+{
+    scene->removeItem(flyingCannonBall);
+    flyingCannonBall = nullptr;
 }
 
 QGraphicsScene *Scene::getScene()

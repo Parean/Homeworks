@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/images">
 	<file>images/cannon.png</file>
-	<file>images/cannonball.png</file>
+	<file>images/littlecannonball.png</file>
         <file>images/landscape.png</file>
     </qresource>
 </RCC>

@@ -1,10 +1,15 @@
 #include "littlecannonball.h"
 
+#include <QImage>
 #include <QPixmap>
 
-LittleCannonBall::LittleCannonBall()
+LittleCannonBall::LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent):
+    CannonBall(size, 50, cannonItem, cannonBallItem)
+{}
+
+QPixmap LittleCannonBall::getPixmap()
 {
-    QPixmap image;
-    image.convertFromImage(QImage(":/images/images/cannonball.png").scaled(20,20, Qt::KeepAspectRatio));
-    cannonBall = new QGraphicsPixmapItem(image);
+    QPixmap cannonBallPixmap;
+    cannonBallPixmap.convertFromImage(QImage(":/images/images/littlecannonball.png").scaled(20,20, Qt::KeepAspectRatio));
+    return cannonBallPixmap;
 }

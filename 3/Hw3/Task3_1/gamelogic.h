@@ -4,6 +4,10 @@
 
 #include <QGraphicsScene>
 
+/**
+ * @brief The GameLogic class
+ * This class contains the logic of the game
+ */
 class GameLogic: public QObject
 {
     Q_OBJECT
@@ -18,6 +22,7 @@ public slots:
     void rotateCannonDown();
     void moveCannonRight();
     void moveCannonLeft();
+    void cannonShot();
 
 private:
     Scene *scene = nullptr;

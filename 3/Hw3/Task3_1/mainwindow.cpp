@@ -7,13 +7,19 @@ MainWindow::MainWindow(QWidget *parent) :
     view = new QGraphicsView(gameLogic.getScene(), this);
     setCentralWidget(view);
 
-    connect(up, SIGNAL(activated()), &gameLogic, SLOT(rotateCannonUp()));
-    connect(down, SIGNAL(activated()), &gameLogic, SLOT(rotateCannonDown()));
-    connect(left, SIGNAL(activated()), &gameLogic, SLOT(moveCannonLeft()));
-    connect(right, SIGNAL(activated()), &gameLogic, SLOT(moveCannonRight()));
+    connect(left, &QShortcut::activated, &gameLogic, &GameLogic::moveCannonLeft);
+    connect(right, &QShortcut::activated, &gameLogic, &GameLogic::moveCannonRight);
+    connect(up, &QShortcut::activated, &gameLogic, &GameLogic::rotateCannonUp);
+    connect(down, &QShortcut::activated, &gameLogic, &GameLogic::rotateCannonDown);
+    connect(space, &QShortcut::activated, &gameLogic, &GameLogic::cannonShot);
 }
 
 MainWindow::~MainWindow()
 {
+    delete left;
+    delete right;
+    delete up;
+    delete down;
+    delete space;
     delete view;
 }

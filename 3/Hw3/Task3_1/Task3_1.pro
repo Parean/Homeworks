@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     scene.cpp \
     gamelogic.cpp \
     cannon.cpp \
-    littlecannonball.cpp
+    littlecannonball.cpp \
+    cannonball.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \

@@ -2,14 +2,16 @@
 
 #include <QPixmap>
 #include <QImage>
+#include <QtMath>
 
-Cannon::Cannon(SceneSize size):
-    sceneSize(size)
+Cannon::Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core):
+    sceneSize(size),
+    cannon(cannonItem),
+    cannonBall(core)
 {
-    QPixmap image;
-    image.convertFromImage(QImage(":/images/images/cannon.png").scaled(70,70, Qt::KeepAspectRatio));
-    cannon = new QGraphicsPixmapItem(image);
-    cannon->setTransformOriginPoint(30, 50);
+    cannon->setTransformOriginPoint(30, 40);
+    cannon->setX(120);
+    setY();
 }
 
 Cannon::~Cannon()
@@ -17,15 +19,39 @@ Cannon::~Cannon()
     delete cannon;
 }
 
-QGraphicsPixmapItem *Cannon::getCannon()
+QPixmap Cannon::getPixmap()
 {
-    return cannon;
+    QPixmap cannonPixmap;
+    cannonPixmap.convertFromImage(QImage(":/images/images/cannon.png").scaled(70,70, Qt::KeepAspectRatio));
+    return cannonPixmap;
 }
 
-void Cannon::setInitialPos()
+QGraphicsPixmapItem *Cannon::getCannonBallItem()
 {
-    cannon->setX(120);
-    setY();
+    return cannonBall->getCannonBallItem();
+}
+
+void Cannon::shot(moveDirection direction)
+{
+    QPoint initialPoint;
+    if (direction == right)
+    {
+        initialPoint.setX(60);
+        initialPoint.setY(-5);
+    }
+    else
+    {
+        initialPoint.setX(75);
+        initialPoint.setY(-2);
+    }
+
+    int x0 = cannon->mapToScene(initialPoint).x();
+    int y0 = cannon->mapToScene(initialPoint).y();
+
+    double angle = 20 - cannon->rotation();
+    angle = qDegreesToRadians(angle);
+    cannonBall->appear(direction, x0, y0, angle);
+
 }
 
 void Cannon::rotate(rotateDirection direction)
