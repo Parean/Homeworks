@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     scene.cpp \
     bigcannonball.cpp \
     networkelement.cpp \
-    client.cpp
+    client.cpp \
+    server.cpp
 
 HEADERS  += mainwindow.h \
     cannon.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     scenesize.h \
     bigcannonball.h \
     networkelement.h \
-    client.h
+    client.h \
+    server.h
 
 RESOURCES += \
     resources.qrc

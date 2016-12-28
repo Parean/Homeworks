@@ -2,6 +2,8 @@
 
 #include "networkelement.h"
 
+#include <QObject>
+
 class Client : public NetworkElement
 {
     Q_OBJECT
