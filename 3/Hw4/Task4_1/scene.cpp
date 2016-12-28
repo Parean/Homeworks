@@ -8,9 +8,6 @@ Scene::Scene(int numPlayers, QObject *parent):
     QObject(parent),
     numCannons(numPlayers)
 {
-    QTime midnight(0,0,0);
-    qsrand(midnight.secsTo(QTime::currentTime()));
-
     QPixmap landscape;
     landscape.convertFromImage(QImage(":/images/images/landscape.png"));
     scene->addItem(new QGraphicsPixmapItem(landscape));
@@ -29,22 +26,32 @@ void Scene::addCannons()
     for (int i = 0; i < numCannons; i++)
     {
         QGraphicsPixmapItem *cannonItem = new QGraphicsPixmapItem(Cannon::getPixmap());
-        QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(LittleCannonBall::getPixmap());
-        CannonBall *cannonBall = new LittleCannonBall(sceneSize, cannonItem, cannonBallItem);
+        CannonBall *cannonBall = nullptr;
+        if(i)
+        {
+            QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(LittleCannonBall::getPixmap());
+            cannonBall = new LittleCannonBall(sceneSize, cannonItem, cannonBallItem);
+        }
+        else
+        {
+            QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(BigCannonBall::getPixmap());
+            cannonBall = new BigCannonBall(sceneSize, cannonItem, cannonBallItem);
+        }
         connect(cannonBall, &CannonBall::cannonBallHit, this, &Scene::cannonBallHit);
         connect(cannonBall, &CannonBall::isHitOtherCannon, this, &Scene::checkHitOtherCannon);
 
         scene->addItem(cannonItem);
-        Cannon *cannon = new Cannon(sceneSize, cannonItem, cannonBall);
+        Cannon *cannon = new Cannon(sceneSize, cannonItem, cannonBall, 500*i+120);
         cannons.append(cannon);
     }
 }
 
 void Scene::cannonShot(int id)
 {
+    emit changeControllersConnection();
     if(flyingCannonBall)
         return;
-
+    currentId = id;
     flyingCannonBall = cannons[id]->getCannonBallItem();
     scene->addItem(flyingCannonBall);
     cannons[id]->shot();
@@ -56,18 +63,26 @@ void Scene::cannonBallHit()
     flyingCannonBall = nullptr;
 }
 
-void Scene::checkHitOtherCannon(QRect &areaOfDestruction)
+void Scene::checkHitOtherCannon(QRectF &areaOfDestruction)
 {
-    QList<QGraphicsItem*> itemsInAreaOfDestruction(scene->items(areaOfDestruction));
-
-    for (int i = 0; i < itemsInAreaOfDestruction.size(); i++)
+    QList<QGraphicsItem*> *itemsInAreaOfDestruction = nullptr;
+    auto height = areaOfDestruction.height();
+    if (height > 5)
     {
-        if (itemsInAreaOfDestruction.at(i)->data(0).toString() == "Cannon")
+        itemsInAreaOfDestruction = new QList<QGraphicsItem*>(scene->items(areaOfDestruction));
+    }
+    else
+    {
+        itemsInAreaOfDestruction = new QList<QGraphicsItem*>(flyingCannonBall->collidingItems());
+    }
+    for (int i = 0; i < itemsInAreaOfDestruction->size(); i++)
+    {
+        if (itemsInAreaOfDestruction->at(i) != cannons[currentId]->getCannonItem() && itemsInAreaOfDestruction->at(i)->data(0).toString() == "Cannon")
         {
-//            emit gameOver();
+            emit gameOver();
         }
     }
-
+    delete itemsInAreaOfDestruction;
 }
 
 QGraphicsScene *Scene::getScene()

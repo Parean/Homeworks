@@ -6,7 +6,7 @@
 #include <QImage>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
-#include <QRect>
+#include <QRectF>
 
 
 enum moveDirection
@@ -60,13 +60,13 @@ signals:
      * It emits when the cannonball finishes its flight
      */
     void cannonBallHit();
-    void isHitOtherCannon(QRect &areaOfDestructuion);
+    void isHitOtherCannon(QRectF &areaOfDestructuion);
 
 private:
     QTimer timer;
     const int g = 10;
 
-    int radiusOfDestruction = 1;
+    int radiusOfDestruction = 80;
     int x0 = 0;
     int y0 = 0;
     int v0 = 30; //Initial velocity

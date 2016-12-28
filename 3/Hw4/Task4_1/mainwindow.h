@@ -1,10 +1,13 @@
 #pragma once
 
 #include "gamelogic.h"
+#include "client.h"
+#include "server.h"
 
 #include <QMainWindow>
 #include <QGraphicsView>
 #include <QShortcut>
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -22,9 +25,23 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void startGame();
+    void createClient();
+    void createServer();
+    void deleteButtons();
+    void gameOver(const QString &message);
+    void connectControllers();
+    void disconnectControllers();
+
 private:
-    GameLogic gameLogic;
+    GameLogic *gameLogic = new GameLogic();
+    NetworkElement *networkElement = nullptr;
     QGraphicsView *view = nullptr;
+    QPushButton *clientButton = new QPushButton("Client");
+    QPushButton *serverButton = new QPushButton("Server");
+    QPushButton *connectButton = nullptr;
+    QWidget *centralWidget = new QWidget(this);
 
     //Variables for user control
     QShortcut *left = new QShortcut(Qt::Key_Left, this);
@@ -32,4 +49,5 @@ private:
     QShortcut *up = new QShortcut(Qt::Key_Up, this);
     QShortcut *down = new QShortcut(Qt::Key_Down, this);
     QShortcut *space = new QShortcut(Qt::Key_Space, this);
+
 };

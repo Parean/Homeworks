@@ -53,8 +53,7 @@ void CannonBall::updatePos()
     {
         timer.stop();
         disconnect(&timer, SIGNAL(timeout()), this, SLOT(updatePos()));
-
-        QRect areaOfDestruction(cannonBall->pos().x() - radiusOfDestruction, cannonBall->pos().y() - radiusOfDestruction,
+        QRectF areaOfDestruction(cannonBall->pos().x() - radiusOfDestruction, cannonBall->pos().y() - radiusOfDestruction,
                    2 * radiusOfDestruction, 2 * radiusOfDestruction);
         emit isHitOtherCannon(areaOfDestruction);
         emit cannonBallHit();

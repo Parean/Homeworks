@@ -5,7 +5,6 @@ Client::Client(GameLogic *game, QObject *parent):
 {
     connect(tcpSocket, &QTcpSocket::readyRead, this, &Client::getMessage);
     connect(tcpSocket, &QTcpSocket::connected, this, &Client::sessionOpened);
-    connect(tcpSocket, &QTcpSocket::disconnected, this, &Client::sessionClosed);
 }
 
 Client::~Client()

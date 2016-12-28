@@ -4,12 +4,12 @@
 #include <QPixmap>
 
 BigCannonBall::BigCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent):
-    CannonBall(size, 25, 50, cannonItem, cannonBallItem)
+    CannonBall(size, 30, 40, cannonItem, cannonBallItem)
 {}
 
 QPixmap BigCannonBall::getPixmap()
 {
     QPixmap cannonBallPixmap;
-    cannonBallPixmap.convertFromImage(QImage(":/images/images/Bigcannonball.png").scaled(40,40, Qt::KeepAspectRatio));
+    cannonBallPixmap.convertFromImage(QImage(":/images/images/cannonball.png").scaled(25, 25, Qt::KeepAspectRatio));
     return cannonBallPixmap;
 }

@@ -11,7 +11,7 @@ public:
     Client(GameLogic *game, QObject *parent = 0);
     ~Client();
 
-private slots:
+public slots:
     void connectToServer();
     void sessionOpened();
 };

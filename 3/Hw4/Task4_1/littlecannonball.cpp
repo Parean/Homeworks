@@ -10,6 +10,6 @@ LittleCannonBall::LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonI
 QPixmap LittleCannonBall::getPixmap()
 {
     QPixmap cannonBallPixmap;
-    cannonBallPixmap.convertFromImage(QImage(":/images/images/littlecannonball.png").scaled(20,20, Qt::KeepAspectRatio));
+    cannonBallPixmap.convertFromImage(QImage(":/images/images/cannonball.png").scaled(20,20, Qt::KeepAspectRatio));
     return cannonBallPixmap;
 }

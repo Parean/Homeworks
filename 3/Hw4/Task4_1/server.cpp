@@ -51,6 +51,5 @@ void Server::connectToClient()
 {
     tcpSocket = tcpServer->nextPendingConnection();
     connect(tcpSocket, &QTcpSocket::readyRead, this, &Server::getMessage);
-    connect(tcpSocket, &QTcpSocket::disconnected, this, &Server::sessionClosed);
     emit connectedToOtherNetworkEntity();
 }

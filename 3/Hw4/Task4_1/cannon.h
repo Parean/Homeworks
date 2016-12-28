@@ -20,7 +20,7 @@ enum rotateDirection
 class Cannon
 {
 public:
-    Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core);
+    Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core, int initPoint);
     ~Cannon();
 
     /**
@@ -52,6 +52,12 @@ public:
      * @return cannonBallItem belongs to the cannon
      */
     QGraphicsPixmapItem *getCannonBallItem();
+
+    /**
+     * @brief getCannonItem
+     * @return cannonItem contained in the cannon
+     */
+    QGraphicsPixmapItem *getCannonItem();
 
     /**
      * @brief shot

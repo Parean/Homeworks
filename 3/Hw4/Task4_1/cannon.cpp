@@ -5,13 +5,14 @@
 #include <QtMath>
 #include <QTime>
 
-Cannon::Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core):
+Cannon::Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core, int initPoint):
     sceneSize(size),
     cannon(cannonItem),
     cannonBall(core)
 {
     cannon->setTransformOriginPoint(30, 40);
-    cannon->setX(qrand() % 600 + 50);
+    cannon->setData(0, "Cannon");
+    cannon->setX(initPoint);
     setY();
 }
 
@@ -30,6 +31,11 @@ QPixmap Cannon::getPixmap()
 QGraphicsPixmapItem *Cannon::getCannonBallItem()
 {
     return cannonBall->getCannonBallItem();
+}
+
+QGraphicsPixmapItem *Cannon::getCannonItem()
+{
+    return cannon;
 }
 
 void Cannon::checkDirection(moveDirection newDirection)

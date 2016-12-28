@@ -3,6 +3,8 @@
 GameLogic::GameLogic(QObject *parent): QObject(parent)
 {
     scene = new Scene(2);
+    connect(scene, SIGNAL(gameOver()), this, SLOT(gameOver()));
+    connect(scene, &Scene::changeControllersConnection, this, &GameLogic::changeControllersConnection);
 }
 
 GameLogic::~GameLogic()
@@ -13,6 +15,19 @@ GameLogic::~GameLogic()
 QGraphicsScene *GameLogic::getScene()
 {
     return scene->getScene();
+}
+
+void GameLogic::changeControllersConnection()
+{
+    isControllersConnected = !isControllersConnected;
+    if(isControllersConnected)
+    {
+        emit connectControllers();
+    }
+    else
+    {
+        emit disconnectControllers();
+    }
 }
 
 void GameLogic::rotateCannonUp()
@@ -37,6 +52,17 @@ void GameLogic::moveCannonRight()
 {
     scene->moveCannonRight(numOfMoves % 2);
     emit moveCurrentCannonRight(moveRight);
+}
+
+void GameLogic::gameOver()
+{
+    QString message;
+    if (!isControllersConnected)
+        message.append("Вы победили");
+    else
+        message.append("Вы проиграли");
+
+    emit gameOver(message);
 }
 
 void GameLogic::cannonShot()

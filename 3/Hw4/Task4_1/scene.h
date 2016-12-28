@@ -2,6 +2,7 @@
 
 #include "cannon.h"
 #include "littlecannonball.h"
+#include "bigcannonball.h"
 #include "scenesize.h"
 
 #include <QGraphicsScene>
@@ -70,11 +71,15 @@ private slots:
      */
     void cannonBallHit();
 
-    void checkHitOtherCannon(QRect &areaOfDestruction);
-//    void gameOver();
+    void checkHitOtherCannon(QRectF &areaOfDestruction);
+
+signals:
+    void gameOver();
+    void changeControllersConnection();
 
 private:
     int numCannons = 0;
+    int currentId = 0;
     QList<Cannon *> cannons;
 
     QGraphicsScene *scene = new QGraphicsScene;
