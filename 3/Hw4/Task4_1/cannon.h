@@ -45,7 +45,7 @@ public:
      * @brief setX
      * It shifts cannon in the predetermined direction on the X axis
      */
-    void setX(moveDirection direction);
+    void setX();
 
     /**
      * @brief getCannonBallItem
@@ -58,7 +58,8 @@ public:
      * @param direction
      * The method is called when the user fires
      */
-    void shot(moveDirection direction);
+    void shot();
+    void checkDirection(moveDirection newDirection);
 
 private:
     /**
@@ -72,6 +73,7 @@ private:
     int const criticalAngle = 30;
     SceneSize sceneSize;
 
+    moveDirection direction = rightDirection;
     QGraphicsPixmapItem *cannon = nullptr;
     CannonBall *cannonBall = nullptr;
 };

@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QImage>
 #include <QtMath>
+#include <QTime>
 
 Cannon::Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *core):
     sceneSize(size),
@@ -10,7 +11,7 @@ Cannon::Cannon(SceneSize &size, QGraphicsPixmapItem *cannonItem, CannonBall *cor
     cannonBall(core)
 {
     cannon->setTransformOriginPoint(30, 40);
-    cannon->setX(120);
+    cannon->setX(qrand() % 600 + 50);
     setY();
 }
 
@@ -31,7 +32,16 @@ QGraphicsPixmapItem *Cannon::getCannonBallItem()
     return cannonBall->getCannonBallItem();
 }
 
-void Cannon::shot(moveDirection direction)
+void Cannon::checkDirection(moveDirection newDirection)
+{
+    if (direction != newDirection)
+    {
+        direction = newDirection;
+        this->flip();
+    }
+}
+
+void Cannon::shot()
 {
     QPoint initialPoint;
     if (direction == rightDirection)
@@ -70,7 +80,7 @@ void Cannon::flip()
 }
 
 
-void Cannon::setX(moveDirection direction)
+void Cannon::setX()
 {
     qreal x = cannon->x() + direction*shift;
     if (x < 0 || x > sceneSize.width - cannon->boundingRect().width())

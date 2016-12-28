@@ -2,11 +2,15 @@
 
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
+#include <QTime>
 
 Scene::Scene(int numPlayers, QObject *parent):
     QObject(parent),
     numCannons(numPlayers)
 {
+    QTime midnight(0,0,0);
+    qsrand(midnight.secsTo(QTime::currentTime()));
+
     QPixmap landscape;
     landscape.convertFromImage(QImage(":/images/images/landscape.png"));
     scene->addItem(new QGraphicsPixmapItem(landscape));
@@ -43,7 +47,7 @@ void Scene::cannonShot(int id)
 
     flyingCannonBall = cannons[id]->getCannonBallItem();
     scene->addItem(flyingCannonBall);
-    cannons[id]->shot(direction);
+    cannons[id]->shot();
 }
 
 void Scene::cannonBallHit()
@@ -63,6 +67,7 @@ void Scene::checkHitOtherCannon(QRect &areaOfDestruction)
 //            emit gameOver();
         }
     }
+
 }
 
 QGraphicsScene *Scene::getScene()
@@ -82,20 +87,12 @@ void Scene::rotateCannonDown(int id)
 
 void Scene::moveCannonLeft(int id)
 {
-    if(direction == rightDirection)
-    {
-        direction = leftDirection;
-        cannons[id]->flip();
-    }
-    cannons[id]->setX(direction);
+    cannons[id]->checkDirection(leftDirection);
+    cannons[id]->setX();
 }
 
 void Scene::moveCannonRight(int id)
 {
-    if(direction == leftDirection)
-    {
-        direction = rightDirection;
-        cannons[id]->flip();
-    }
-    cannons[id]->setX(direction);
+    cannons[id]->checkDirection(rightDirection);
+    cannons[id]->setX();
 }

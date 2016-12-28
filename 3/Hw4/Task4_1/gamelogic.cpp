@@ -2,7 +2,7 @@
 
 GameLogic::GameLogic(QObject *parent): QObject(parent)
 {
-    scene = new Scene();
+    scene = new Scene(2);
 }
 
 GameLogic::~GameLogic()
@@ -43,5 +43,5 @@ void GameLogic::cannonShot()
 {
     scene->cannonShot(numOfMoves % 2);
     emit currentCannonShot(shot);
-//    numOfMoves++;
+    numOfMoves++;
 }
