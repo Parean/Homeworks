@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +20,8 @@ SOURCES += main.cpp\
     gamelogic.cpp \
     littlecannonball.cpp \
     scene.cpp \
-    bigcannonball.cpp
+    bigcannonball.cpp \
+    networkelement.cpp
 
 HEADERS  += mainwindow.h \
     cannon.h \
@@ -28,7 +30,8 @@ HEADERS  += mainwindow.h \
     littlecannonball.h \
     scene.h \
     scenesize.h \
-    bigcannonball.h
+    bigcannonball.h \
+    networkelement.h
 
 RESOURCES += \
     resources.qrc

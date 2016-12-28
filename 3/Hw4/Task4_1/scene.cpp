@@ -82,21 +82,20 @@ void Scene::rotateCannonDown(int id)
 
 void Scene::moveCannonLeft(int id)
 {
-    if(direction == right)
+    if(direction == rightDirection)
     {
-        direction = left;
+        direction = leftDirection;
         cannons[id]->flip();
     }
-
-    cannons[id]->setX(left);
+    cannons[id]->setX(direction);
 }
 
 void Scene::moveCannonRight(int id)
 {
-    if(direction == left)
+    if(direction == leftDirection)
     {
-        direction = right;
+        direction = rightDirection;
         cannons[id]->flip();
     }
-    cannons[id]->setX(right);
+    cannons[id]->setX(direction);
 }

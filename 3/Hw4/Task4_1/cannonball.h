@@ -11,8 +11,8 @@
 
 enum moveDirection
 {
-    left = -1,
-    right = 1
+    leftDirection = -1,
+    rightDirection = 1
 };
 
 /**

@@ -34,7 +34,7 @@ QGraphicsPixmapItem *Cannon::getCannonBallItem()
 void Cannon::shot(moveDirection direction)
 {
     QPoint initialPoint;
-    if (direction == right)
+    if (direction == rightDirection)
     {
         initialPoint.setX(60);
         initialPoint.setY(-5);

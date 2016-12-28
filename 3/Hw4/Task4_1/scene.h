@@ -75,7 +75,7 @@ private slots:
 
 private:
     int numCannons = 0;
-    moveDirection direction = right;
+    moveDirection direction = rightDirection;
     QList<Cannon *> cannons;
 
     QGraphicsScene *scene = new QGraphicsScene;
