@@ -83,4 +83,6 @@ private:
 
     QGraphicsScene *scene = new QGraphicsScene;
     QGraphicsPixmapItem *flyingCannonBall = nullptr;
+    CannonBall *littleCannonBall = nullptr;
+    CannonBall *bigCannonBall = nullptr;
 };

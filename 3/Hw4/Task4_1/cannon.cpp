@@ -21,10 +21,17 @@ Cannon::~Cannon()
     delete cannon;
 }
 
-QPixmap Cannon::getPixmap()
+QPixmap Cannon::getOnePixmap()
 {
     QPixmap cannonPixmap;
-    cannonPixmap.convertFromImage(QImage(":/images/images/cannon.png").scaled(70,70, Qt::KeepAspectRatio));
+    cannonPixmap.convertFromImage(QImage(":/images/images/cannonOne.png").scaled(70,70, Qt::KeepAspectRatio));
+    return cannonPixmap;
+}
+
+QPixmap Cannon::getTwoPixmap()
+{
+    QPixmap cannonPixmap;
+    cannonPixmap.convertFromImage(QImage(":/images/images/cannonTwo.png").scaled(70,70, Qt::KeepAspectRatio));
     return cannonPixmap;
 }
 
@@ -45,6 +52,11 @@ void Cannon::checkDirection(moveDirection newDirection)
         direction = newDirection;
         this->flip();
     }
+}
+
+void Cannon::setCannonBall(CannonBall *newCannonBall)
+{
+    cannonBall = newCannonBall;
 }
 
 void Cannon::shot()

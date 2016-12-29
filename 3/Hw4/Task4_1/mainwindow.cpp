@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(serverButton);
     layout->addWidget(clientButton);
     setCentralWidget(centralWidget);
-    connectControllers();
 }
 
 void MainWindow::startGame()
@@ -75,6 +74,7 @@ void MainWindow::createClient()
     networkElement = new Client(gameLogic);
     connect(connectButton, SIGNAL(clicked()), networkElement, SLOT(connectToServer()));
     connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
+    connectControllers();
     gameLogic->changeControllersConnection();
 }
 
@@ -85,6 +85,8 @@ void MainWindow::createServer()
     centralWidget->layout()->addWidget(connectButton);
     networkElement = new Server(gameLogic);
     connect(connectButton, SIGNAL(clicked()), this, SLOT(startGame()));
+    connect(networkElement, &NetworkElement::connected, this, &MainWindow::connectControllers);
+
 }
 
 MainWindow::~MainWindow()

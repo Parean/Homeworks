@@ -27,7 +27,16 @@ public:
      * @brief getPixmap
      * @return Returns the default pixmap element that can be used to initialize the cannon
      */
-    static QPixmap getPixmap();
+    static QPixmap getOnePixmap();
+
+
+    /**
+     * @brief getPixmap
+     * @return Returns the default pixmap element that can be used to initialize the cannon
+     */
+    static QPixmap getTwoPixmap();
+
+    void setCannonBall(CannonBall *newCannonBall);
 
     /**
      * @brief rotate

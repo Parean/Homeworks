@@ -25,17 +25,26 @@ void Scene::addCannons()
     SceneSize sceneSize(scene->width(), scene->height());
     for (int i = 0; i < numCannons; i++)
     {
-        QGraphicsPixmapItem *cannonItem = new QGraphicsPixmapItem(Cannon::getPixmap());
+        QGraphicsPixmapItem *cannonItem = nullptr;
+        if(i)
+        {
+            cannonItem = new QGraphicsPixmapItem(Cannon::getOnePixmap());
+        }
+        else
+        {
+            cannonItem = new QGraphicsPixmapItem(Cannon::getTwoPixmap());
+        }
+
         CannonBall *cannonBall = nullptr;
         if(i)
         {
             QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(LittleCannonBall::getPixmap());
-            cannonBall = new LittleCannonBall(sceneSize, cannonItem, cannonBallItem);
+            littleCannonBall = cannonBall = new LittleCannonBall(sceneSize, cannonItem, cannonBallItem);
         }
         else
         {
             QGraphicsPixmapItem *cannonBallItem = new QGraphicsPixmapItem(BigCannonBall::getPixmap());
-            cannonBall = new BigCannonBall(sceneSize, cannonItem, cannonBallItem);
+            bigCannonBall = cannonBall = new BigCannonBall(sceneSize, cannonItem, cannonBallItem);
         }
         connect(cannonBall, &CannonBall::cannonBallHit, this, &Scene::cannonBallHit);
         connect(cannonBall, &CannonBall::isHitOtherCannon, this, &Scene::checkHitOtherCannon);
