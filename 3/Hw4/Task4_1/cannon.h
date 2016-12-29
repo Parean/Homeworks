@@ -65,6 +65,11 @@ public:
      * The method is called when the user fires
      */
     void shot();
+
+    /**
+     * @brief checkDirection
+     * Check if current direction of cannon is correct and change it if not
+     */
     void checkDirection(moveDirection newDirection);
 
 private:

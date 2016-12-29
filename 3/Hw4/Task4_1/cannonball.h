@@ -60,6 +60,11 @@ signals:
      * It emits when the cannonball finishes its flight
      */
     void cannonBallHit();
+
+    /**
+     * @brief isHitOtherCannon
+     * Emited to check whether the target struck
+     */
     void isHitOtherCannon(QRectF &areaOfDestructuion);
 
 private:

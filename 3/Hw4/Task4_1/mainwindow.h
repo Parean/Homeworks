@@ -31,6 +31,11 @@ private slots:
     void createServer();
     void deleteButtons();
     void gameOver(const QString &message);
+
+    /**
+     * @brief connectControllers
+     * Need to lock and unlock ability to move for user
+     */
     void connectControllers();
     void disconnectControllers();
 
@@ -43,7 +48,7 @@ private:
     QPushButton *connectButton = nullptr;
     QWidget *centralWidget = new QWidget(this);
 
-    //Variables for user control
+    ///Variables for user control
     QShortcut *left = new QShortcut(Qt::Key_Left, this);
     QShortcut *right = new QShortcut(Qt::Key_Right, this);
     QShortcut *up = new QShortcut(Qt::Key_Up, this);

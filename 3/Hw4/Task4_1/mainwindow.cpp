@@ -74,7 +74,7 @@ void MainWindow::createClient()
     centralWidget->layout()->addWidget(connectButton);
     networkElement = new Client(gameLogic);
     connect(connectButton, SIGNAL(clicked()), networkElement, SLOT(connectToServer()));
-    connect(networkElement, &NetworkElement::connectedToOtherNetworkEntity, this, &MainWindow::startGame);
+    connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
     gameLogic->changeControllersConnection();
 }
 
@@ -84,7 +84,7 @@ void MainWindow::createServer()
     connectButton = new QPushButton("Start game");
     centralWidget->layout()->addWidget(connectButton);
     networkElement = new Server(gameLogic);
-    connect(networkElement, &NetworkElement::connectedToOtherNetworkEntity, this, &MainWindow::startGame);
+    connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
 }
 
 MainWindow::~MainWindow()
@@ -96,4 +96,5 @@ MainWindow::~MainWindow()
     delete space;
     delete view;
     delete gameLogic;
+    delete networkElement;
 }

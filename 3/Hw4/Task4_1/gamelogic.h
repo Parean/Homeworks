@@ -38,9 +38,17 @@ public slots:
     void gameOver();
 
 signals:
-    void gameOver(const QString &) const;
+    /**
+     * Emited to lock and unlock the ability to move
+     */
     void connectControllers();
     void disconnectControllers();
+
+    /**
+     * @brief gameOver
+     * Emited when game over and contains message with results of game
+     */
+    void gameOver(const QString &) const;
     void rotateCurrentCannonUp(events event);
     void rotateCurrentCannonDown(events event);
     void moveCurrentCannonRight(events event);

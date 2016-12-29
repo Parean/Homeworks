@@ -24,5 +24,5 @@ void Client::connectToServer()
 
 void Client::sessionOpened()
 {
-    emit connectedToOtherNetworkEntity();
+    emit connected();
 }

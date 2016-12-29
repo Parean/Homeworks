@@ -70,7 +70,6 @@ private slots:
      * It remove cannonball from the scene
      */
     void cannonBallHit();
-
     void checkHitOtherCannon(QRectF &areaOfDestruction);
 
 signals:

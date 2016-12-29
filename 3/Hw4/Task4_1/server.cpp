@@ -6,39 +6,9 @@
 Server::Server(GameLogic *game, QObject *parent):
     NetworkElement(game, parent)
 {
-    QNetworkConfigurationManager manager;
-
-    if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired)
-    {
-        networkSession = new QNetworkSession(manager.defaultConfiguration(), this);
-        connect(networkSession, &QNetworkSession::opened, this, &Server::sessionOpened);
-        networkSession->open();
-    }
-    else
-    {
-        sessionOpened();
-    }
-    connect(tcpServer, &QTcpServer::newConnection, this, &Server::connectToClient);
-}
-
-
-Server::~Server()
-{
-    if (networkSession)
-    {
-        delete networkSession;
-    }
-    if (tcpServer)
-    {
-        delete tcpServer;
-    }
-}
-
-
-void Server::sessionOpened()
-{
     tcpServer = new QTcpServer(this);
     tcpServer->listen();
+    connect(tcpServer, &QTcpServer::newConnection, this, &Server::connectToClient);
 
     QFile port("port.txt");
     port.open(QIODevice::WriteOnly);
@@ -46,10 +16,14 @@ void Server::sessionOpened()
     port.close();
 }
 
+Server::~Server()
+{
+    delete tcpServer;
+}
 
 void Server::connectToClient()
 {
     tcpSocket = tcpServer->nextPendingConnection();
     connect(tcpSocket, &QTcpSocket::readyRead, this, &Server::getMessage);
-    emit connectedToOtherNetworkEntity();
+    emit connected();
 }
