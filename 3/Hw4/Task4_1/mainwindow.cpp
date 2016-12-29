@@ -84,7 +84,7 @@ void MainWindow::createServer()
     connectButton = new QPushButton("Start game");
     centralWidget->layout()->addWidget(connectButton);
     networkElement = new Server(gameLogic);
-    connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
+    connect(connectButton, SIGNAL(clicked()), this, SLOT(startGame()));
 }
 
 MainWindow::~MainWindow()
