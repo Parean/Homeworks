@@ -23,7 +23,7 @@ class CannonBall : public QObject
 {
     Q_OBJECT
 public:
-    explicit CannonBall(SceneSize &size, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
+    explicit CannonBall(SceneSize &size, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
     ~CannonBall();
 
     /**
@@ -36,15 +36,15 @@ public:
      * @brief appear
      * It Specifies the initial position of the cannonball on the scene
      */
-    void appear(moveDirection dir, int x, int y, double angle);
+    void appear(moveDirection dir, int x, int y, double angle, QGraphicsPixmapItem *cannonItem);
 
 protected:
 
     /**
      * @brief CannonBall
-     * This constructor allows you to change the initial velocity from the inherited classes
+     * This constructor allows you to change the initial velocity and radius from the inherited classes
      */
-    CannonBall(SceneSize &size, int v, int r, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
+    CannonBall(SceneSize &size, int v, int r, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
 
 private slots:
 
@@ -71,7 +71,7 @@ private:
     QTimer timer;
     const int g = 10;
 
-    int radiusOfDestruction = 80;
+    int radiusOfDestruction = 0;
     int x0 = 0;
     int y0 = 0;
     int v0 = 30; //Initial velocity

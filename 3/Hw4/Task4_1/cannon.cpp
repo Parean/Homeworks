@@ -54,9 +54,15 @@ void Cannon::checkDirection(moveDirection newDirection)
     }
 }
 
-void Cannon::setCannonBall(CannonBall *newCannonBall)
+void Cannon::setCannonBall(CannonBall *newCannonBall, bool isBig)
 {
     cannonBall = newCannonBall;
+    isCannonBallBig = isBig;
+}
+
+bool Cannon::isBigCannonBall() const
+{
+    return isCannonBallBig;
 }
 
 void Cannon::shot()
@@ -78,7 +84,7 @@ void Cannon::shot()
 
     double angle = 20 - cannon->rotation();
     angle = qDegreesToRadians(angle);
-    cannonBall->appear(direction, x0, y0, angle);
+    cannonBall->appear(direction, x0, y0, angle, cannon);
 
 }
 

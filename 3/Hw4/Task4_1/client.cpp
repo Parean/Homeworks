@@ -3,6 +3,7 @@
 Client::Client(GameLogic *game, QObject *parent):
     NetworkElement(game, parent)
 {
+    tcpSocket = new QTcpSocket(this);
     connect(tcpSocket, &QTcpSocket::readyRead, this, &Client::getMessage);
     connect(tcpSocket, &QTcpSocket::connected, this, &Client::sessionOpened);
 }

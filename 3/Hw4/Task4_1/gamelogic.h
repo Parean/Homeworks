@@ -11,6 +11,7 @@ enum events
     rotateDown,
     moveLeft,
     moveRight,
+    changedCannonBall,
     shot
 };
 
@@ -30,6 +31,7 @@ public:
 
 public slots:
     void changeControllersConnection();
+    void changeCannonBall();
     void rotateCannonUp();
     void rotateCannonDown();
     void moveCannonRight();
@@ -50,6 +52,7 @@ signals:
      */
     void gameOver(const QString &) const;
     void rotateCurrentCannonUp(events event);
+    void changeCurrentCannonBall(events event);
     void rotateCurrentCannonDown(events event);
     void moveCurrentCannonRight(events event);
     void moveCurrentCannonLeft(events event);

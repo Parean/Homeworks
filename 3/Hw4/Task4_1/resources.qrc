@@ -4,5 +4,6 @@
 	<file>images/cannonOne.png</file>
 	<file>images/cannonball.png</file>
         <file>images/landscape.png</file>
+        <file>images/bang.png</file>
     </qresource>
 </RCC>

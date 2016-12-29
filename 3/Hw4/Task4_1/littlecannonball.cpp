@@ -3,8 +3,8 @@
 #include <QImage>
 #include <QPixmap>
 
-LittleCannonBall::LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent):
-    CannonBall(size, 50, 1, cannonItem, cannonBallItem)
+LittleCannonBall::LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonBallItem, QObject *parent):
+    CannonBall(size, 50, 0, cannonBallItem)
 {}
 
 QPixmap LittleCannonBall::getPixmap()

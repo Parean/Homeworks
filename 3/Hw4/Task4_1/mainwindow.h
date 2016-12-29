@@ -8,6 +8,7 @@
 #include <QGraphicsView>
 #include <QShortcut>
 #include <QPushButton>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -54,5 +55,6 @@ private:
     QShortcut *up = new QShortcut(Qt::Key_Up, this);
     QShortcut *down = new QShortcut(Qt::Key_Down, this);
     QShortcut *space = new QShortcut(Qt::Key_Space, this);
+    QShortcut *tab = new QShortcut(Qt::Key_Tab, this);
 
 };

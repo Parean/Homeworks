@@ -15,7 +15,7 @@ class NetworkElement: public QObject
     Q_OBJECT
 public:
     explicit NetworkElement(GameLogic *game, QObject *parent = 0);
-    ~NetworkElement();
+    ~NetworkElement() {}
 
 protected slots:
     /**
@@ -42,9 +42,10 @@ signals:
     void currentCannonMovedRight();
     void currentCannonMovedLeft();
     void currentCannonShot();
+    void currentCannonBallChanged();
 
 protected:
-    QTcpSocket *tcpSocket = new QTcpSocket(this);
+    QTcpSocket *tcpSocket = nullptr;
     GameLogic *gameLogic = nullptr;
 
 private:

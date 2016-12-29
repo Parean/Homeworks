@@ -9,17 +9,15 @@ NetworkElement::NetworkElement(GameLogic *game, QObject *parent):
     connect(gameLogic, &GameLogic::moveCurrentCannonRight, this, &NetworkElement::sendMessage);
     connect(gameLogic, &GameLogic::rotateCurrentCannonDown, this, &NetworkElement::sendMessage);
     connect(gameLogic, &GameLogic::rotateCurrentCannonUp, this, &NetworkElement::sendMessage);
+    connect(gameLogic, &GameLogic::changeCurrentCannonBall, this, &NetworkElement::sendMessage);
+
 
     connect(this, &NetworkElement::currentCannonMovedLeft, gameLogic, &GameLogic::moveCannonLeft);
     connect(this, &NetworkElement::currentCannonMovedRight, gameLogic, &GameLogic::moveCannonRight);
     connect(this, &NetworkElement::currentCannonRotatedDown, gameLogic, &GameLogic::rotateCannonDown);
     connect(this, &NetworkElement::currentCannonRotatedUp, gameLogic, &GameLogic::rotateCannonUp);
     connect(this, &NetworkElement::currentCannonShot, gameLogic, &GameLogic::cannonShot);
-}
-
-NetworkElement::~NetworkElement()
-{
-    delete tcpSocket;
+    connect(this, &NetworkElement::currentCannonBallChanged, gameLogic, &GameLogic::changeCannonBall);
 }
 
 void NetworkElement::sendMessage(events event)
@@ -64,6 +62,11 @@ void NetworkElement::getMessage()
     case rotateUp:
     {
         emit currentCannonRotatedUp();
+        break;
+    }
+    case changedCannonBall:
+    {
+        emit currentCannonBallChanged();
         break;
     }
     case shot:

@@ -40,6 +40,7 @@ void MainWindow::connectControllers()
     connect(up, &QShortcut::activated, gameLogic, &GameLogic::rotateCannonUp);
     connect(down, &QShortcut::activated, gameLogic, &GameLogic::rotateCannonDown);
     connect(space, &QShortcut::activated, gameLogic, &GameLogic::cannonShot);
+    connect(tab, &QShortcut::activated, gameLogic, &GameLogic::changeCannonBall);
 }
 
 
@@ -50,6 +51,7 @@ void MainWindow::disconnectControllers()
     disconnect(up, &QShortcut::activated, gameLogic, &GameLogic::rotateCannonUp);
     disconnect(down, &QShortcut::activated, gameLogic, &GameLogic::rotateCannonDown);
     disconnect(space, &QShortcut::activated, gameLogic, &GameLogic::cannonShot);
+    disconnect(tab, &QShortcut::activated, gameLogic, &GameLogic::changeCannonBall);
 }
 
 void MainWindow::gameOver(const QString &message)
@@ -74,7 +76,6 @@ void MainWindow::createClient()
     networkElement = new Client(gameLogic);
     connect(connectButton, SIGNAL(clicked()), networkElement, SLOT(connectToServer()));
     connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
-    connectControllers();
     gameLogic->changeControllersConnection();
 }
 
@@ -86,13 +87,13 @@ void MainWindow::createServer()
     networkElement = new Server(gameLogic);
     connect(connectButton, SIGNAL(clicked()), this, SLOT(startGame()));
     connect(networkElement, &NetworkElement::connected, this, &MainWindow::connectControllers);
-
 }
 
 MainWindow::~MainWindow()
 {
     delete left;
     delete right;
+    delete tab;
     delete up;
     delete down;
     delete space;

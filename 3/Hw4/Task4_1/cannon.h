@@ -36,7 +36,8 @@ public:
      */
     static QPixmap getTwoPixmap();
 
-    void setCannonBall(CannonBall *newCannonBall);
+
+    void setCannonBall(CannonBall *newCannonBall, bool isBig);
 
     /**
      * @brief rotate
@@ -49,6 +50,8 @@ public:
      * It reflects cannon about the vertical axis
      */
     void flip();
+
+    bool isBigCannonBall() const;
 
     /**
      * @brief setX
@@ -92,6 +95,7 @@ private:
     int const shift = 5;
     int const criticalAngle = 30;
     SceneSize sceneSize;
+    bool isCannonBallBig = false;
 
     moveDirection direction = rightDirection;
     QGraphicsPixmapItem *cannon = nullptr;

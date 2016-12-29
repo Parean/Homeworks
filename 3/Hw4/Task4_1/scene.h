@@ -10,6 +10,7 @@
 #include <QList>
 #include <QObject>
 #include <QRect>
+#include <QLabel>
 
 /**
  * @brief The Scene class
@@ -64,6 +65,9 @@ public:
      */
     void cannonShot(int id = 0);
 
+    void setCannonBall(int id);
+
+
 private slots:
     /**
      * @brief cannonBallHit
@@ -75,14 +79,21 @@ private slots:
 signals:
     void gameOver();
     void changeControllersConnection();
+    void changeCannonBallLabel();
 
 private:
     int numCannons = 0;
     int currentId = 0;
     QList<Cannon *> cannons;
+    QTimer timer;
 
+
+    QLabel *leftLabel = new QLabel("Little cannonball");
+    QLabel *rightLabel = new QLabel("Little cannonball");
+    QList<QLabel *> labels;
     QGraphicsScene *scene = new QGraphicsScene;
     QGraphicsPixmapItem *flyingCannonBall = nullptr;
+    QGraphicsPixmapItem *bang = nullptr;
     CannonBall *littleCannonBall = nullptr;
     CannonBall *bigCannonBall = nullptr;
 };

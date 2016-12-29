@@ -17,6 +17,12 @@ QGraphicsScene *GameLogic::getScene()
     return scene->getScene();
 }
 
+void GameLogic::changeCannonBall()
+{
+    scene->setCannonBall(numOfMoves % 2);
+    emit changeCurrentCannonBall(changedCannonBall);
+}
+
 void GameLogic::changeControllersConnection()
 {
     isControllersConnected = !isControllersConnected;

@@ -13,7 +13,7 @@ class LittleCannonBall : public CannonBall
 {
     Q_OBJECT
 public:
-    LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonItem, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
+    LittleCannonBall(SceneSize &size, QGraphicsPixmapItem *cannonBallItem, QObject *parent = 0);
     ~LittleCannonBall(){}
 
     /**
