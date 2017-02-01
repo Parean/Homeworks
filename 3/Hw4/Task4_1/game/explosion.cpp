@@ -2,7 +2,8 @@
 
 #include <QPainter>
 
-Explosion::Explosion(const QPointF &point)
+Explosion::Explosion(const QPointF &point, double radius):
+    r(radius)
 {
     setPos(point);
     explosion = new QPixmap(":/images/images/explosion.png");

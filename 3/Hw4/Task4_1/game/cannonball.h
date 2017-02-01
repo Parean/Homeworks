@@ -55,11 +55,6 @@ private slots:
     void updatePos();
 
 signals:
-    /**
-     * @brief cannonBallHit
-     * It emits when the cannonball finishes its flight
-     */
-    void cannonBallHit();
 
     /**
      * @brief isHitOtherCannon

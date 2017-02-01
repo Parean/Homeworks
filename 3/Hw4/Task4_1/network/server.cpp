@@ -1,7 +1,7 @@
+#include "network/server.h"
+
 #include <QNetworkConfigurationManager>
 #include <QFile>
-
-#include "network/server.h"
 
 Server::Server(GameLogic *game, QObject *parent):
     NetworkElement(game, parent)

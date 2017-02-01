@@ -56,6 +56,5 @@ void CannonBall::updatePos()
         QRectF areaOfDestruction(cannonBall->pos().x() + 10 - radiusOfDestruction, cannonBall->pos().y() + 15 - radiusOfDestruction,
                    2 * radiusOfDestruction, 2 * radiusOfDestruction); //+10 and +15 – it is adjustment due to the asymmetry of the cannonball image
         emit isHitOtherCannon(areaOfDestruction);
-        emit cannonBallHit();
     }
 }

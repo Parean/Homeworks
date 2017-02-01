@@ -47,13 +47,11 @@ void Scene::addCannons()
         if(i)
         {
             cannonItem = new QGraphicsPixmapItem(Cannon::getOnePixmap());
-            connect(littleCannonBall, &CannonBall::cannonBallHit, this, &Scene::cannonBallHit);
             connect(littleCannonBall, &CannonBall::isHitOtherCannon, this, &Scene::checkHitOtherCannon);
         }
         else
         {
             cannonItem = new QGraphicsPixmapItem(Cannon::getTwoPixmap());
-            connect(bigCannonBall, &CannonBall::cannonBallHit, this, &Scene::cannonBallHit);
             connect(bigCannonBall, &CannonBall::isHitOtherCannon, this, &Scene::checkHitOtherCannon);
         }
 
@@ -89,13 +87,15 @@ void Scene::checkHitOtherCannon(QRectF &areaOfDestruction)
     if (height)
     {
         itemsInAreaOfDestruction = new QList<QGraphicsItem*>(scene->items(areaOfDestruction));
-        scene->addItem(new Explosion(areaOfDestruction.center()));
+        scene->addItem(new Explosion(areaOfDestruction.center(), 40));
     }
     else
     {
         itemsInAreaOfDestruction = new QList<QGraphicsItem*>(flyingCannonBall->collidingItems());
+        scene->addItem(new Explosion(areaOfDestruction.center(), 15));
     }
 
+    cannonBallHit();
     for (int i = 0; i < itemsInAreaOfDestruction->size(); i++)
     {
         if (itemsInAreaOfDestruction->at(i) != cannons[currentId]->getCannonItem() && itemsInAreaOfDestruction->at(i)->data(0).toString() == "Cannon")
