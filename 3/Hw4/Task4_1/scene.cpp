@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "explosion.h"
 
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
@@ -84,11 +85,11 @@ void Scene::checkHitOtherCannon(QRectF &areaOfDestruction)
 {
     QList<QGraphicsItem*> *itemsInAreaOfDestruction = nullptr;
     auto height = areaOfDestruction.height();
-    scene->addRect(areaOfDestruction);
 
     if (height)
     {
         itemsInAreaOfDestruction = new QList<QGraphicsItem*>(scene->items(areaOfDestruction));
+        scene->addItem(new Explosion(areaOfDestruction.center()));
     }
     else
     {

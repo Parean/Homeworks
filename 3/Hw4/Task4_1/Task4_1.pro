@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     bigcannonball.cpp \
     networkelement.cpp \
     client.cpp \
-    server.cpp
+    server.cpp \
+    explosion.cpp
 
 HEADERS  += mainwindow.h \
     cannon.h \
@@ -35,7 +36,8 @@ HEADERS  += mainwindow.h \
     bigcannonball.h \
     networkelement.h \
     client.h \
-    server.h
+    server.h \
+    explosion.h
 
 RESOURCES += \
     resources.qrc
