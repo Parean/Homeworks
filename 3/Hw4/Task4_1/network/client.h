@@ -16,7 +16,7 @@ public:
     ~Client();
 
 public slots:
-    void connectToServer();
+    void connectToServer(const QString &ip, quint16 port);
     void sessionOpened();
 };
 

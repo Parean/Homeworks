@@ -9,6 +9,7 @@
 #include <QShortcut>
 #include <QPushButton>
 #include <QLabel>
+#include <QLineEdit>
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,7 @@ public:
 
 private slots:
     void startGame();
+    void connectToServer();
     void createClient();
     void createServer();
     void deleteButtons();
@@ -41,6 +43,8 @@ private slots:
     void disconnectControllers();
 
 private:
+    QList<QLabel *> labels;
+    QList<QLineEdit *> lineEdits;
     GameLogic *gameLogic = new GameLogic();
     NetworkElement *networkElement = nullptr;
     QGraphicsView *view = nullptr;

@@ -9,11 +9,16 @@ Server::Server(GameLogic *game, QObject *parent):
     tcpServer = new QTcpServer(this);
     tcpServer->listen();
     connect(tcpServer, &QTcpServer::newConnection, this, &Server::connectToClient);
+}
 
-    QFile port("port.txt");
-    port.open(QIODevice::WriteOnly);
-    port.write(QString::number(tcpServer->serverPort()).toLocal8Bit().data());
-    port.close();
+QString Server::getIP() const
+{
+    return tcpServer->serverAddress().toString();
+}
+
+quint16 Server::getPort() const
+{
+    return tcpServer->serverPort();
 }
 
 Server::~Server()

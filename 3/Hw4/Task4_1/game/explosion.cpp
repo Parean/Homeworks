@@ -12,15 +12,9 @@ Explosion::Explosion(const QPointF &point, double radius):
     timer.start(25);
 }
 
-QRectF Explosion::boundingRect() const
-{
-    return QRectF(-r, -r, 2 * r, 2 * r);
-}
-
 void Explosion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(boundingRect(), *explosion,
-                        QRect(currentSpriteCoordinate, 0, explosion->height(), explosion->height()));
+    painter->drawPixmap(boundingRect(), *explosion, QRect(currentSpriteCoordinate, 0, explosion->height(), explosion->height()));
 }
 
 void Explosion::nextSprite()
@@ -30,4 +24,9 @@ void Explosion::nextSprite()
         deleteLater();
     else
         update(boundingRect());
+}
+
+QRectF Explosion::boundingRect() const
+{
+    return QRectF(-r, -r, 2 * r, 2 * r);
 }

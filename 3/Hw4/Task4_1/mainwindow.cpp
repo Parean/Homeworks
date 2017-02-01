@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::startGame()
 {
     takeCentralWidget();
+    labels.clear();
+    lineEdits.clear();
+
     delete connectButton;
     delete centralWidget->layout();
     delete centralWidget;
@@ -72,21 +75,44 @@ void MainWindow::createClient()
 {
     deleteButtons();
     connectButton = new QPushButton("Try connect");
+
+    labels.append(new QLabel("IP"));
+    labels.append(new QLabel("Port"));
+    for(auto l : labels)
+    {
+        lineEdits.append(new QLineEdit());
+        centralWidget->layout()->addWidget(l);
+        centralWidget->layout()->addWidget(lineEdits.last());
+    }
     centralWidget->layout()->addWidget(connectButton);
+
     networkElement = new Client(gameLogic);
-    connect(connectButton, SIGNAL(clicked()), networkElement, SLOT(connectToServer()));
+    connect(connectButton, &QPushButton::clicked, this, &MainWindow::connectToServer);
     connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
     gameLogic->changeControllersConnection();
+}
+
+void MainWindow::connectToServer()
+{
+    dynamic_cast<Client *>(networkElement)->connectToServer(lineEdits.at(0)->text(), lineEdits.at(1)->text().toInt());
 }
 
 void MainWindow::createServer()
 {
     deleteButtons();
-    connectButton = new QPushButton("Start game");
-    centralWidget->layout()->addWidget(connectButton);
     networkElement = new Server(gameLogic);
-    connect(connectButton, SIGNAL(clicked()), this, SLOT(startGame()));
+
+    labels.append(new QLabel("Waiting for client..."));
+    labels.append(new QLabel(QString("IP: %1").arg(dynamic_cast<Server *>(networkElement)->getIP())));
+    labels.append(new QLabel(QString("Port: %1").arg(dynamic_cast<Server *>(networkElement)->getPort())));
+
+    for(auto l : labels)
+    {
+        centralWidget->layout()->addWidget(l);
+    }
+
     connect(networkElement, &NetworkElement::connected, this, &MainWindow::connectControllers);
+    connect(networkElement, &NetworkElement::connected, this, &MainWindow::startGame);
 }
 
 MainWindow::~MainWindow()
