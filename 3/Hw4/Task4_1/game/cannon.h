@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scenesize.h"
-#include "littlecannonball.h"
+#include "game/scenesize.h"
+#include "game/littlecannonball.h"
 
 #include <QPixmap>
 #include <QGraphicsScene>

@@ -1,4 +1,4 @@
-#include "networkelement.h"
+#include "network/networkelement.h"
 
 NetworkElement::NetworkElement(GameLogic *game, QObject *parent):
     QObject(parent),

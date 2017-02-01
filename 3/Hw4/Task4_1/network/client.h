@@ -1,6 +1,6 @@
 #pragma once
 
-#include "networkelement.h"
+#include "network/networkelement.h"
 
 #include <QObject>
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "cannon.h"
-#include "littlecannonball.h"
-#include "bigcannonball.h"
-#include "scenesize.h"
+#include "game/cannon.h"
+#include "game/littlecannonball.h"
+#include "game/bigcannonball.h"
+#include "game/scenesize.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>

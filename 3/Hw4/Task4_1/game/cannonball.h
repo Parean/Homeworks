@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scenesize.h"
+#include "game/scenesize.h"
 
 #include <QObject>
 #include <QImage>

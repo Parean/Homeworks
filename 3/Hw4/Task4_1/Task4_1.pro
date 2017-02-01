@@ -15,29 +15,31 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cannon.cpp \
-    cannonball.cpp \
-    gamelogic.cpp \
-    littlecannonball.cpp \
-    scene.cpp \
-    bigcannonball.cpp \
-    networkelement.cpp \
-    client.cpp \
-    server.cpp \
-    explosion.cpp
+    network/client.cpp \
+    network/networkelement.cpp \
+    network/server.cpp \
+    game/bigcannonball.cpp \
+    game/cannon.cpp \
+    game/cannonball.cpp \
+    game/explosion.cpp \
+    game/gamelogic.cpp \
+    game/littlecannonball.cpp \
+    game/scene.cpp
+
 
 HEADERS  += mainwindow.h \
-    cannon.h \
-    cannonball.h \
-    gamelogic.h \
-    littlecannonball.h \
-    scene.h \
-    scenesize.h \
-    bigcannonball.h \
-    networkelement.h \
-    client.h \
-    server.h \
-    explosion.h
+    network/client.h \
+    network/networkelement.h \
+    network/server.h \
+    game/bigcannonball.h \
+    game/cannon.h \
+    game/cannonball.h \
+    game/explosion.h \
+    game/gamelogic.h \
+    game/littlecannonball.h \
+    game/scene.h \
+    game/scenesize.h
+
 
 RESOURCES += \
     resources.qrc

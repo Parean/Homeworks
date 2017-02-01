@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gamelogic.h"
+#include "game/gamelogic.h"
 
 #include <QtNetwork>
 #include <QTcpSocket>

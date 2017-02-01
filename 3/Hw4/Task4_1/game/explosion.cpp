@@ -1,12 +1,13 @@
-#include "explosion.h"
+#include "game/explosion.h"
+
 #include <QPainter>
 
 Explosion::Explosion(const QPointF &point)
 {
     setPos(point);
     explosion = new QPixmap(":/images/images/explosion.png");
-    connect(&timer, &QTimer::timeout, this, &Explosion::nextFrame);
-    currentFrame -= explosion->height();
+    connect(&timer, &QTimer::timeout, this, &Explosion::nextSprite);
+    currentSpriteCoordinate -= explosion->height();
     timer.start(25);
 }
 
@@ -18,13 +19,13 @@ QRectF Explosion::boundingRect() const
 void Explosion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(boundingRect(), *explosion,
-                        QRect(currentFrame, 0, explosion->height(), explosion->height()));
+                        QRect(currentSpriteCoordinate, 0, explosion->height(), explosion->height()));
 }
 
-void Explosion::nextFrame()
+void Explosion::nextSprite()
 {
-    currentFrame += explosion->height();
-    if (currentFrame >= explosion->width())
+    currentSpriteCoordinate += explosion->height();
+    if (currentSpriteCoordinate >= explosion->width())
         deleteLater();
     else
         update(boundingRect());

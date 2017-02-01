@@ -1,5 +1,5 @@
-#include "scene.h"
-#include "explosion.h"
+#include "game/scene.h"
+#include "game/explosion.h"
 
 #include <QPixmap>
 #include <QGraphicsPixmapItem>

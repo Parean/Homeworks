@@ -1,8 +1,8 @@
 #pragma once
 
-#include "gamelogic.h"
-#include "client.h"
-#include "server.h"
+#include "game/gamelogic.h"
+#include "network/client.h"
+#include "network/server.h"
 
 #include <QMainWindow>
 #include <QGraphicsView>

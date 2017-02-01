@@ -1,4 +1,4 @@
-#include "littlecannonball.h"
+#include "game/littlecannonball.h"
 
 #include <QImage>
 #include <QPixmap>

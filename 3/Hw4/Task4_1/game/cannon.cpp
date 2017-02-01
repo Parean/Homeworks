@@ -1,4 +1,4 @@
-#include "cannon.h"
+#include "game/cannon.h"
 
 #include <QPixmap>
 #include <QImage>

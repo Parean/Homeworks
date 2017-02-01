@@ -1,4 +1,4 @@
-#include "client.h"
+#include "network/client.h"
 
 Client::Client(GameLogic *game, QObject *parent):
     NetworkElement(game, parent)

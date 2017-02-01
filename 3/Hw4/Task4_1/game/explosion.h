@@ -19,8 +19,8 @@ private:
     QPixmap *explosion = nullptr;
     QTimer timer;
     double r = 40;
-    int currentFrame = 0;
+    int currentSpriteCoordinate = 0;
 
 private slots:
-    void nextFrame();
+    void nextSprite();
 };

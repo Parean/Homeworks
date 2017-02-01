@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cannonball.h"
+#include "game/cannonball.h"
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
