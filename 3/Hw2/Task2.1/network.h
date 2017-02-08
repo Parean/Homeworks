@@ -25,7 +25,7 @@ enum systems { windows, ubuntu, debian };
 
 /**
  * @brief The Network class
- * Class represents network of computers with different operating systems, some of which are infected
+ * Class represents network of computers with different operating systems, some of which are tryInfected
  */
 class Network
 {
@@ -35,24 +35,24 @@ public:
 	 * @brief Network
 	 * The constructor takes as parameter the number of computers in the network
 	 */
-	Network(int number);
+    Network(int number);
 	~Network();
 
 	/**
 	 * @brief start
 	 * It starts work of the network
 	 */
-	void start();
+    void start(int steps);
 
 	/**
 	 * @brief checkInfection
-	 * It cheks whether the computers were infected on the current step
+	 * It cheks whether the computers were tryInfected on the current step
 	 */
 	void checkInfection();
 
     /**
      * @brief getNumOfInfected
-     * @return number of infected computers
+     * @return number of tryInfected computers
      */
     int getNumOfInfected() const;
 
@@ -64,7 +64,7 @@ public:
 private:
 	int numOfInfected = 0;
 	int const numOfComputers = 0;
-	QVector< QPair<Computer*, QVector<bool>> > network;
+    QVector<Computer *> network;
     Virus virus;
 
     /**

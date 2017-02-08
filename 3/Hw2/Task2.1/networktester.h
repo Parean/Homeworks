@@ -39,7 +39,7 @@ private slots:
             while(!network.isEnd())
             {
                 network.checkInfection();
-                QVERIFY2(numOfInfected <= network.getNumOfInfected(), "Number of infected computers has decreased");
+                QVERIFY2(numOfInfected <= network.getNumOfInfected(), "Number of tryInfected computers has decreased");
                 numOfInfected = network.getNumOfInfected();
             }
         }
@@ -74,7 +74,7 @@ private slots:
             }
             lastStatusOfInfection = currentStatusOfInfection;
         }
-        QVERIFY2(isCorrectOrder, "Computers infected incorrectly");
+        QVERIFY2(isCorrectOrder, "Computers tryInfected incorrectly");
     }
 };
 

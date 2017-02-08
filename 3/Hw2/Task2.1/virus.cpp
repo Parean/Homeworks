@@ -2,7 +2,7 @@
 
 #include "virus.h"
 
-void Virus::infect(Computer *computer)
+void Virus::tryInfect(Computer *computer)
 {
 	if (computer->isInfected())
 		return;

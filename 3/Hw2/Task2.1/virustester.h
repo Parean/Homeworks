@@ -4,9 +4,9 @@
 #include <QtTest/QtTest>
 
 #include "virus.h"
-#include "ubuntucomputer.h"
-#include "debiancomputer.h"
-#include "windowscomputer.h"
+#include "computer/ubuntucomputer.h"
+#include "computer/debiancomputer.h"
+#include "computer/windowscomputer.h"
 
 class VirusTester : public QObject
 {
@@ -37,13 +37,13 @@ private slots:
         for (int i = 0; i < numOfInfection; i++)
         {
             Computer *computer = new DebianComputer;
-            virus.infect(computer);
+            virus.tryInfect(computer);
             if(computer->isInfected())
                 numOfInfected++;
             deleteComputer(computer);
         }
         float probability = numOfInfected / static_cast<float>(numOfInfection);
-        QVERIFY2(probability < 0.4 && probability > 0.2, "Computers are infected with incorrect probability");
+        QVERIFY2(probability < 0.4 && probability > 0.2, "Computers are tryInfected with incorrect probability");
     }
 
 	void testUbuntuComputer()
@@ -51,13 +51,13 @@ private slots:
 		for (int i = 0; i < numOfInfection; i++)
 		{
 			Computer *computer = new UbuntuComputer;
-            virus.infect(computer);
+            virus.tryInfect(computer);
 			if(computer->isInfected())
 				numOfInfected++;
 			deleteComputer(computer);
 		}
         float probability = numOfInfected / static_cast<float>(numOfInfection);
-        QVERIFY2(probability < 0.5 && probability > 0.3, "Computers are infected with incorrect probability");
+        QVERIFY2(probability < 0.5 && probability > 0.3, "Computers are tryInfected with incorrect probability");
 	}
 
     void testWindowsComputer()
@@ -65,13 +65,13 @@ private slots:
         for (int i = 0; i < numOfInfection; i++)
         {
             Computer *computer = new WindowsComputer;
-            virus.infect(computer);
+            virus.tryInfect(computer);
             if(computer->isInfected())
                 numOfInfected++;
             deleteComputer(computer);
         }
         float probability = numOfInfected / static_cast<float>(numOfInfection);
-        QVERIFY2(probability < 0.6 && probability > 0.4, "Computers are infected with incorrect probability");
+        QVERIFY2(probability < 0.6 && probability > 0.4, "Computers are tryInfected with incorrect probability");
 
     }
 };

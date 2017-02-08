@@ -2,11 +2,11 @@
 
 #include <QTime>
 
-#include "computer.h"
+#include "computer/computer.h"
 
 /**
  * @brief The Virus class
- * Class implements virus which can infect the computer with a some probability of infection,
+ * Class implements virus which can tryInfect the computer with a some probability of tryInfection,
  * that is determined by the operating system type
  */
 class Virus
@@ -19,8 +19,8 @@ public:
 	}
 
 	/**
-	 * @brief infect
-	 * Function to infect the computer
+     * @brief tryInfect
+     * Function to tryInfect the computer
 	 */
-    void infect(Computer *computer);
+    void tryInfect(Computer *computer);
 };

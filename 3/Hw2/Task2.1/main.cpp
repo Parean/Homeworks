@@ -11,7 +11,5 @@ int main()
     NetworkTester networkTester;
     QTest::qExec(&networkTester);
 
-	Network network(5);
-	network.start();
 }
 

@@ -1,6 +1,9 @@
 #pragma once
 
+#include "generator/generator.h"
+
 #include <QString>
+#include <QVector>
 
 /**
  * @brief The Computer class
@@ -13,25 +16,19 @@ public:
 
 	/**
 	 * @brief isInfected
-	 * @return true if computer is infected and false if not
+     * @return true if computer is tryInfected and false if not
 	 */
-	bool isInfected() const
-	{
-		return computerInfected;
-	}
+    bool isInfected() const;
 
 	/**
 	 * @brief setInfected
-	 * Function to make computer infected
+     * Function to make computer tryInfected
 	 */
-	void setInfected()
-	{
-		computerInfected = true;
-	}
+    void setInfected();
 
 	/**
 	 * @brief getProbability
-	 * @return probability of infection
+     * @return probability of tryInfection
 	 * The probability depends on the type derived class system
 	 */
 	virtual int getProbability() const = 0;
@@ -42,10 +39,15 @@ public:
 	 */
 	virtual QString getSystem() const = 0;
 
+    void tryInfect(Generator *generator);
+    void tryInfected(int probability);
+    void connectWithOtherComputer(Computer *otherComputer);
+
 protected:
 	int const probabilityOfInfection = 0;
 
 private:
+    QVector<Computer *> neighbours;
 	bool computerInfected = false;
 };
 

@@ -4,14 +4,21 @@ QT += core testlib
 
 SOURCES += main.cpp \
     network.cpp \
-    virus.cpp
+    virus.cpp \
+    generator/fakegenerator.cpp \
+    generator/randomgenerator.cpp \
+    computer/computer.cpp
+
 
 HEADERS += \
-    computer.h \
-    windowscomputer.h \
-    ubuntucomputer.h \
-    debiancomputer.h \
     network.h \
     virus.h \
     virustester.h \
-    networktester.h
+    networktester.h \
+    computer/computer.h \
+    computer/debiancomputer.h \
+    computer/ubuntucomputer.h \
+    computer/windowscomputer.h \
+    generator/fakegenerator.h \
+    generator/generator.h \
+    generator/randomgenerator.h

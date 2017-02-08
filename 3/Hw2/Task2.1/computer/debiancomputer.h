@@ -2,7 +2,7 @@
 
 #include <QString>
 
-#include "computer.h"
+#include "computer/computer.h"
 
 /**
  * @brief The DebianComputer class
