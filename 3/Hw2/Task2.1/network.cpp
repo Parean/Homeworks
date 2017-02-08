@@ -1,11 +1,14 @@
 #include <iostream>
 
 #include <QThread>
+#include <QtAlgorithms>
 
 #include "network.h"
 
-Network::Network(int number):
-    numOfComputers(number)
+Network::Network(int number, InfectionChecker *newInfectionChecker):
+    numOfComputers(number),
+    numOfInfected(1),
+    infectionChecker(newInfectionChecker)
 {
     if (number < 1)
         throw IncorrectNumberOfComputers();
@@ -16,14 +19,24 @@ Network::Network(int number):
         network.push_back(computer);
     }
 
-    network[0]->setInfected();
+    network[0]->tryInfected(true);
     generateNetwork();
+}
+
+Network::Network(QVector<Computer *> &computers, InfectionChecker *newInfectionChecker):
+    infectionChecker(newInfectionChecker),
+    numOfComputers(computers.length())
+{
+    network.resize(numOfComputers);
+    qCopy(computers.begin(), computers.end(), network.begin());
+
+    for(int i = 0; i < numOfComputers; i++)
+        numOfInfected += network[i]->isInfected();
 }
 
 Network::~Network()
 {
-    for (int i = 0; i < numOfComputers; i++)
-        delete network.at(i).first;
+    network.clear();
 }
 
 void Network::generateNetwork()
@@ -68,7 +81,7 @@ Computer *Network::createComputer()
     }
 }
 
-void Network::checkInfection()
+void Network::makeStep()
 {
     if (isEnd())
         return;
@@ -77,15 +90,7 @@ void Network::checkInfection()
     {
         if (network[i]->isInfected())
         {
-            for (int j = 0; j < numOfComputers; j++)
-            {
-                if (network.at(i).second.at(j) && !network.at(j).first->isInfected())
-                {
-                    virus.tryInfect(network.at(j).first);
-                    if (network.at(j).first->isInfected())
-                        numOfInfected++;
-                }
-            }
+            numOfInfected += network[i]->tryInfect(infectionChecker);
         }
     }
 }
@@ -104,13 +109,30 @@ void Network::printStatus() const
     for (int i = 0; i < numOfComputers; i++)
     {
         std::cout << "Computer " << i + 1 << " is ";
-        if (network.at(i).first->isInfected())
-            std::cout << "tryInfected\n";
+        if (network[i]->isInfected())
+            std::cout << "infected\n";
         else
-            std::cout << "not tryInfected\n";
+            std::cout << "not infected\n";
     }
 
-    std::cout << "\nThe total number of tryInfected computers: " << numOfInfected;
+    std::cout << "\nThe total number of infected computers: " << numOfInfected << "\n\n";
+}
+
+QVector<Computer *> Network::getComputers() const
+{
+     QVector<Computer *> computers(network);
+     return computers;
+}
+
+QVector<bool> Network::getStatusOfInfection() const
+{
+    QVector<bool> status(numOfComputers);
+    for(int i = 0; i < numOfInfected; i++)
+    {
+        status[i] = network[i]->isInfected();
+    }
+
+    return status;
 }
 
 void Network::printNetwork() const
@@ -119,36 +141,13 @@ void Network::printNetwork() const
     {
         for (int j = 0; j < numOfComputers; j++)
         {
-            if (network.at(i).second.at(j))
+            if (i == j || network[i]->isConnectWithOtherComputer(network[j]))
                 std::cout << 1 << " ";
             else
                 std::cout << 0 << " ";
         }
         std::cout << "\n";
     }
-}
-
-QVector<QVector<bool>> Network::getNetwork() const
-{
-    QVector<QVector<bool>> computers;
-    for (int i = 0; i < numOfComputers; i++)
-    {
-        QVector<bool> edges = QVector<bool>(network.at(i).second);
-        computers.push_back(edges);
-    }
-
-    return computers;
-}
-
-QVector<bool> Network::getStatusOfInfection() const
-{
-    QVector<bool> computers;
-    for (int i = 0; i < numOfComputers; i++)
-    {
-        computers.append(network.at(i).first->isInfected());
-    }
-
-    return computers;
 }
 
 void Network::start(int steps)
@@ -166,11 +165,11 @@ void Network::start(int steps)
         printStatus();
         if (numOfComputers == numOfInfected)
         {
-            std::cout << "\nAll computers are tryInfected";
+            std::cout << "\nAll computers are infected\n\n";
             return;
         }
 
-        checkInfection();
+        makeStep();
         QThread::sleep(4);
     }
 }

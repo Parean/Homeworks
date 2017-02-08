@@ -1,6 +1,6 @@
 #pragma once
 
-#include "generator/generator.h"
+#include "infectionchecker/infectionchecker.h"
 
 #include <QString>
 #include <QVector>
@@ -12,7 +12,6 @@
 class Computer
 {
 public:
-	virtual ~Computer() {}
 
 	/**
 	 * @brief isInfected
@@ -21,17 +20,11 @@ public:
     bool isInfected() const;
 
 	/**
-	 * @brief setInfected
-     * Function to make computer tryInfected
-	 */
-    void setInfected();
-
-	/**
 	 * @brief getProbability
      * @return probability of tryInfection
 	 * The probability depends on the type derived class system
 	 */
-	virtual int getProbability() const = 0;
+    int getProbability() const;
 
 	/**
 	 * @brief getSystem
@@ -39,15 +32,28 @@ public:
 	 */
 	virtual QString getSystem() const = 0;
 
-    void tryInfect(Generator *generator);
-    void tryInfected(int probability);
+    /**
+     * @brief tryInfect computer tries infect its neighbours
+     * @param infectionChecker that decides whether the neighbor is infected
+     * @return num of infected computers
+     */
+    int tryInfect(InfectionChecker *infectionChecker);
+
+    /**
+     * @brief tryInfected computer will infected if isInfected true
+     * @return true if infected false if not
+     */
+    bool tryInfected(bool isInfected);
     void connectWithOtherComputer(Computer *otherComputer);
+    bool isConnectWithOtherComputer(Computer *otherComputer) const;
+    bool areNeighboursInfected() const;
 
 protected:
-	int const probabilityOfInfection = 0;
+    Computer(int probability): probabilityOfInfection(probability) {}
 
 private:
     QVector<Computer *> neighbours;
-	bool computerInfected = false;
+    int const probabilityOfInfection = 0;
+    bool computerInfected = false;
 };
 

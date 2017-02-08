@@ -4,11 +4,11 @@
 #include <QPair>
 #include <QtGlobal>
 
-#include "computer.h"
-#include "ubuntucomputer.h"
-#include "debiancomputer.h"
-#include "windowscomputer.h"
-#include "virus.h"
+#include "infectionchecker/infectionchecker.h"
+#include "computer/computer.h"
+#include "computer/ubuntucomputer.h"
+#include "computer/debiancomputer.h"
+#include "computer/windowscomputer.h"
 
 /**
  * @brief The IncorrectNumberOfComputers class
@@ -33,39 +33,60 @@ public:
 
 	/**
 	 * @brief Network
-	 * The constructor takes as parameter the number of computers in the network
+     * The constructor takes as parameter the number of computers in the network and infection checker
 	 */
-    Network(int number);
+    Network(int number, InfectionChecker *newInfectionChecker);
+
+    /**
+     * @brief Network
+     * The constructor takes as parameter computers and infection checker
+     */
+    Network(QVector<Computer *> &computers, InfectionChecker *newInfectionChecker);
 	~Network();
 
 	/**
 	 * @brief start
-	 * It starts work of the network
+     * It starts work of the network
 	 */
     void start(int steps);
 
 	/**
-	 * @brief checkInfection
-	 * It cheks whether the computers were tryInfected on the current step
+     * @brief makeStep
+     * It cheks whether the computers were infected on the current step
 	 */
-	void checkInfection();
+    void makeStep();
 
     /**
      * @brief getNumOfInfected
-     * @return number of tryInfected computers
+     * @return number of infected computers
      */
     int getNumOfInfected() const;
 
+    /**
+     * @brief getComputers
+     * @return computers of network
+     */
+    QVector<Computer *> getComputers() const;
+
+    /**
+     * @brief getStatusOfInfection
+     * if computer with index "i" is infected – array[i] == true, if not – array[i] == false
+     */
     QVector<bool> getStatusOfInfection() const;
+
 	void printNetwork() const;
-    QVector<QVector<bool> > getNetwork() const;
+
+    /**
+     * @brief isEnd
+     * @return true if all computers are infected
+     */
     bool isEnd() const;
 
 private:
-	int numOfInfected = 0;
+    int numOfInfected = 0;
 	int const numOfComputers = 0;
     QVector<Computer *> network;
-    Virus virus;
+    InfectionChecker *infectionChecker = nullptr;
 
     /**
      * @brief createComputer

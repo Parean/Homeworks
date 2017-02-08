@@ -11,16 +11,10 @@
 class UbuntuComputer : public Computer
 {
 public:
+    UbuntuComputer(): Computer(40) {}
+
 	virtual QString getSystem() const
 	{
 		return QString("ubuntu");
 	}
-
-	virtual int getProbability() const
-	{
-		return probabilityOfInfection;
-	}
-
-private:
-	int const probabilityOfInfection = 40;
 };

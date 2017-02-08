@@ -11,16 +11,10 @@
 class DebianComputer : public Computer
 {
 public:
+    DebianComputer(): Computer(30) {}
+
 	virtual QString getSystem() const
 	{
-		return "debian";
+        return QString("debian");
 	}
-
-	virtual int getProbability() const
-	{
-		return probabilityOfInfection;
-	}
-
-private:
-	int const probabilityOfInfection = 30;
 };

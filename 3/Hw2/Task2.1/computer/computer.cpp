@@ -5,9 +5,10 @@ bool Computer::isInfected() const
     return computerInfected;
 }
 
-void Computer::setInfected()
+
+int Computer::getProbability() const
 {
-    computerInfected = true;
+    return probabilityOfInfection;
 }
 
 void Computer::connectWithOtherComputer(Computer *otherComputer)
@@ -16,15 +17,37 @@ void Computer::connectWithOtherComputer(Computer *otherComputer)
     otherComputer->neighbours.append(this);
 }
 
-void Computer::tryInfect(Generator *generator)
+bool Computer::isConnectWithOtherComputer(Computer *otherComputer) const
+{
+    return neighbours.contains(otherComputer);
+}
+
+int Computer::tryInfect(InfectionChecker *infectionChecker)
+{
+    int numOfInfected = 0;
+    for(auto n : neighbours)
+    {
+        if (n->isInfected())
+            continue;
+
+        numOfInfected += n->tryInfected(infectionChecker->isInfected(probabilityOfInfection));
+    }
+
+    return numOfInfected;
+}
+
+bool Computer::areNeighboursInfected() const
 {
     for(auto n : neighbours)
     {
-
+        if (n->isInfected())
+            return true;
     }
+
+    return false;
 }
 
-void Computer::tryInfected(int probability)
+bool Computer::tryInfected(bool isInfected)
 {
-
+    return computerInfected = isInfected;
 }

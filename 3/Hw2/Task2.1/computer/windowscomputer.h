@@ -11,16 +11,10 @@
 class WindowsComputer : public Computer
 {
 public:
+    WindowsComputer(): Computer(30) {}
+
 	virtual QString getSystem() const
 	{
 		return QString("windows");
 	}
-
-	virtual int getProbability() const
-	{
-		return probabilityOfInfection;
-	}
-
-private:
-	int const probabilityOfInfection = 50;
 };
