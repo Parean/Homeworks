@@ -1,0 +1,62 @@
+import Text.Read
+import Data.List
+
+data Record = Record { name :: String, number :: String }
+    deriving Eq
+
+instance Show Record where
+    show (Record name number) = name ++ " " ++ number
+
+launchPhoneBook = do
+  help
+  loop []
+
+help = do
+    putStrLn "0 - exit"
+    putStrLn "1 - add a record"
+    putStrLn "2 - find record by name"
+    putStrLn "3 - find record by number"
+    putStrLn "4 - save to file"
+    putStrLn "5 - load from file"
+    putStrLn "6 - help"
+
+loop book = do
+    putStrLn "\nEnter command\n"
+    c <- getLine
+    case c of
+        "0" -> return ()
+        "1" -> addRecord  >>= loop
+        "2" -> findByName >> loop book
+        "3" -> findByNumber >> loop book
+        "4" -> saveToFile >> loop book
+        "5" -> loadFromFile >>= loop
+        "6" -> help >> loop book
+        _   -> loop book
+        where
+            addRecord = do
+                name <- putStrLn "Enter name" >> getLine
+                number <- putStrLn "Enter number" >> getLine
+                let record = (Record name number) in
+                    if record `elem` book
+                        then return book
+                        else return (record : book)
+
+            printRecord (Just x)  = (putStrLn . show) x >> return ()
+            printRecord Nothing = putStrLn "No founded records" >> return ()
+
+            findByName = do
+                recordName <- putStrLn "Enter name" >> getLine
+                printRecord (find ((== recordName) . name) book)
+
+            findByNumber = do
+                recordNumber <- putStrLn "Enter number" >> getLine
+                printRecord (find ((== recordNumber) . number) book)
+
+            saveToFile = getFile >>= (flip writeFile) (unlines (map (show) book))
+
+            loadFromFile = do
+                book <- getFile >>= readFile
+                return (map (convertListToRecord . words) (lines book)) where
+                    convertListToRecord [name, number] = (Record name number)
+
+            getFile = putStrLn "Enter file name" >> getLine
